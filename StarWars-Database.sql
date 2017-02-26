@@ -1,7 +1,7 @@
 create database StarWars
 go
 
-Use StarWars
+use StarWars
 go
 
 create table Images(
@@ -38,7 +38,7 @@ Health int,
 ImageId int foreign key references Images(Id)
 )
 
-create table unitLevels(
+create table UnitLevels(
 Name varchar(50),
 Level int,
 --battle
@@ -61,7 +61,7 @@ Speed int,
 Scout int
 )
 
-create table units(
+create table Units(
 Id int identity primary key,
 Name varchar(50),
 --Price
@@ -75,6 +75,7 @@ Speed int,
 FuelConsumption int, --per square
 
 WarFactotyRequiredLevel int,
+ImageId int foreign key references Images(Id)
 )
 
 create table EngineeringFactories(
