@@ -1,4 +1,9 @@
-begin tran
+create database StarWars
+go
+
+Use StarWars
+go
+
 create table Images(
 Id int identity primary key,
 Name varchar(50),
@@ -117,5 +122,3 @@ Armor int,
 Health int,
 Speed int,
 )
-
-rollback
