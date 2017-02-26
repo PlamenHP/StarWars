@@ -1,3 +1,4 @@
+
 create database StarWars
 go
 
@@ -10,7 +11,7 @@ Name varchar(50),
 Image varbinary(max)
 )
 
-create table Price(
+create table Prices(
 Id int identity primary key,
 Name varchar(50),
 MetalCost int,
@@ -22,7 +23,7 @@ TimeCost int
 create table ResurceBuildingsLevels(
 Name varchar(50) check (Name in ('MetalFactory','GasFactory','MineralsFactory','WarFactory')),
 Level int,
-PriceId int foreign key references Price(Id),
+PriceId int foreign key references Prices(Id),
 ResourceTime int,
 ResourseAmount int,
 
@@ -52,28 +53,28 @@ constraint PK_unitLevels
 primary key (Level, Name)
 ) 
 
-create table EngineeringUpgradePrices(
-Level int primary key,
-Atack int,
-Shield int,
-Armor int,
-Speed int,
-Scout int
+create table EngineeringLevelsPrices(
+EngineeringLevel int primary key,
+AtackPrice int foreign key references Prices(Id),
+ShieldPrice int foreign key references Prices(Id),
+ArmorPrice int foreign key references Prices(Id),
+SpeedPrice int foreign key references Prices(Id),
+ScoutPrice int foreign key references Prices(Id),
 )
 
 create table Units(
 Id int identity primary key,
 Name varchar(50),
 --Price
-PriceId int foreign key references Price(Id),
+PriceId int foreign key references Prices(Id),
 
 --battle stats
 Atack int,
 Shield int,
 Armor int,
+
 Speed int,
 FuelConsumption int, --per square
-
 WarFactotyRequiredLevel int,
 ImageId int foreign key references Images(Id)
 )
@@ -84,8 +85,8 @@ Name varchar(50),
 AtackLevel int,
 ShieldLevel int,
 ArmorLevel int,
-HealthLevel int,
 ScoutLevel int,
+HealthLevel int,
 ImageId int foreign key references Images(Id)
 )
 
@@ -113,7 +114,7 @@ IncomeMineralsTime int,
 IncomeMineralsAmount int
 )
 
-create table createUnits(
+create table CreateUnits(
 Id int identity primary key,
 Name varchar(50),
 
