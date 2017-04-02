@@ -1,0 +1,12 @@
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\obj\Debug\StartWars3.Data.csprojResolveAssemblyReference.cache
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\bin\Debug\StartWars3.Data.dll.config
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\bin\Debug\StartWars3.Data.dll
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\bin\Debug\StartWars3.Data.pdb
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\bin\Debug\EntityFramework.dll
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\bin\Debug\StarWars3.Models.dll
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\bin\Debug\StarWars3.Models.pdb
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\bin\Debug\EntityFramework.xml
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\obj\Debug\StartWars3.Data.dll
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\obj\Debug\StartWars3.Data.pdb

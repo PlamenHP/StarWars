@@ -1,11 +1,9 @@
 namespace StarWars3.Models
 {
-    using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
+    [Table("EngineeringFactories")]
     public class EngineeringFactory : Factory
     {
         public virtual ICollection<LevelUpgradePrice> AttackLevel { get; set; }
@@ -17,5 +15,11 @@ namespace StarWars3.Models
         public virtual ICollection<LevelUpgradePrice> ScoutLevel { get; set; }
 
         public virtual ICollection<LevelUpgradePrice> HealthLevel { get; set; }
+
+        public int Attack { get; set; }
+
+        public int Armor { get; set; }
+
+        public int Shield { get; set; }
     }
 }

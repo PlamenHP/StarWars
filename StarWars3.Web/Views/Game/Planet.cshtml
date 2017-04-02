@@ -1,0 +1,36 @@
+﻿@using StarWars3.Web.Controllers;
+@model StarWars3.Web.ViewModels.Game.PlanetViewModel
+@{
+    ViewBag.Title = "Planet";
+}
+
+	<div class="well">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar">
+					<li class="active"><a href="#">Planet <span class="sr-only">(current)</span></a></li>
+					<li><a href="#">Units</a></li>
+					<li><a href="#">Upgrades</a></li>
+				</ul>
+			</div>
+			<div>
+				@foreach (var building in Model.Buildings)
+				{
+					<div class="col-md-4">
+						<a href='@Url.Action(null, null,new { @id = building.Id })' class="col-md-11 navbar btn well btn-xs btn-lg  text-primary">
+							<div class="bg-danger col-md-12">
+								<h4>@building.FactoryType</h4>
+							</div>
+							<hr />
+							<img src="@building.ViewImage">
+						</a>
+					</div>
+				}
+			</div>
+		</div>
+
+	</div>
+
+
+
+

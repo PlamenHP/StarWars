@@ -14,7 +14,6 @@ namespace StarWars3.Data
         }
 
         public virtual DbSet<CreateUnit> CreateUnits { get; set; }
-        public virtual DbSet<EngineeringFactory> EngineeringFactories { get; set; }
         public virtual DbSet<LevelUpgradePrice> EngineeringLevelsPrices { get; set; }
         public virtual DbSet<Factory> Factories { get; set; }
         public virtual DbSet<Image> Images { get; set; }
