@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - STAR-WARS III</title>
+	@Styles.Render("~/Content/css")
+	@Scripts.Render("~/bundles/modernizr")
+
+	<script type="text/javascript">
+			var height = '@System.Configuration.ConfigurationManager.AppSettings["ImageHeight"]';
+			var width = '@System.Configuration.ConfigurationManager.AppSettings["ImageWidth"]';
+	</script>
+
+</head>
+<body>
+	<div class="navbar bg-danger">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="/home/index" class="navbar-left myLogo"><img src="~/Content/Images/Home/logo.png"></a>
+				@Html.ActionLink("STAR-WARS III", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+			</div>
+			<div class="navbar-collapse collapse">
+				@Html.Partial("_LoginPartial")
+			</div>
+		</div>
+	</div>
+
+	<div class="container body-content">
+		@RenderBody()
+		<!--START USER FOOTER-->
+		<footer class="navbar navbar-inverse">
+			<div id="footer">
+				<div class="container text-center">
+					<p class="text-muted">Copyright &copy; @DateTime.Now.Year <a href="http://softuni.bg" title"tropicdesign">STAR-WARS III</a></p>
+					<p class="text-muted">Plamen Petrov & Nikola Kolev  PROJECT </p>
+				</div>
+			</div>
+		</footer>
+		<!--END FOOTER-->
+	</div>
+
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
+	@RenderSection("scripts", required: false)
+</body>
+</html>

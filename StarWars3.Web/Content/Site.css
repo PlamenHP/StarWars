@@ -1,0 +1,22 @@
+﻿.navbar {
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+    /* the rest of your styling */
+}
+
+.myLogo {
+	margin-right:1em;
+}
+
+.well{
+    background: rgba(157, 137, 199, 0.75);
+}
+
+body {
+	margin: 0;
+	background-image: url('Images/background.jpg');
+	background-size: 100%;
+	background-repeat:no-repeat ;
+	display: compact;
+}
