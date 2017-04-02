@@ -168,14 +168,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Game\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\Game\BuildingViewModel.cs" />
+    <Compile Include="ViewModels\Game\PlanetViewModel.cs" />
+    <Compile Include="ViewModels\IdentityModels.cs" />
+    <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -248,7 +251,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Game.cshtml" />
+    <Content Include="Views\Game\Planet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -266,6 +269,10 @@
     <ProjectReference Include="..\StarWars3.Models\StarWars3.Models.csproj">
       <Project>{cd6f20d2-1e20-4220-9425-88df836a4e07}</Project>
       <Name>StarWars3.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StarWars3.Services\StarWars3.Services.csproj">
+      <Project>{04F5EF78-CA1A-44CD-BDC6-6750860D44EB}</Project>
+      <Name>StarWars3.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

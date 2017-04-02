@@ -6,15 +6,8 @@ namespace StarWars3.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public class EngineeringFactory
+    public class EngineeringFactory : Factory
     {
-
-        [ForeignKey("Planet")]
-        public int Id { get; set; }
-
-        [StringLength(50)]
-        public string Name { get; set; }
-
         public virtual ICollection<LevelUpgradePrice> AttackLevel { get; set; }
 
         public virtual ICollection<LevelUpgradePrice> ShieldLevel { get; set; }
@@ -24,10 +17,5 @@ namespace StarWars3.Models
         public virtual ICollection<LevelUpgradePrice> ScoutLevel { get; set; }
 
         public virtual ICollection<LevelUpgradePrice> HealthLevel { get; set; }
-
-        public int? ImageId { get; set; }
-        public virtual Image Image { get; set; }
-
-        public virtual Planet Planet { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using StarWars3.Web.Models;
+using StarWars3.Web.ViewModels;
 
 namespace StarWars3.Web.Controllers
 {

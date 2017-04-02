@@ -24,50 +24,5 @@ namespace StarWars3.Data
         public virtual DbSet<ResurceBuildingsLevel> ResurceBuildingsLevels { get; set; }
         public virtual DbSet<UnitLevel> UnitLevels { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            #region Unicode
-            modelBuilder.Entity<CreateUnit>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<EngineeringFactory>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Factory>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Image>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Planet>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Player>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Price>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ResurceBuildingsLevel>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<UnitLevel>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Unit>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-            #endregion
-        }
     }
 }

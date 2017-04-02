@@ -4,7 +4,6 @@ namespace StarWars3.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     public class Player
     {
@@ -15,6 +14,8 @@ namespace StarWars3.Models
         }
 
         public int Id { get; set; }
+        [Index(IsUnique = true),MaxLength(128)]
+        public string AspNetId { get; set; }
 
         [StringLength(50)]
         public string Name { get; set; }

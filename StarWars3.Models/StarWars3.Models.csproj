@@ -52,6 +52,7 @@
     <Compile Include="CreateUnit.cs" />
     <Compile Include="EngineeringFactory.cs" />
     <Compile Include="Factory.cs" />
+    <Compile Include="FactoryType.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="LevelUpgradePrice.cs" />
     <Compile Include="Planet.cs" />

@@ -5,7 +5,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using StarWars3.Web.Models;
+using StarWars3.Web.ViewModels;
 
 namespace StarWars3.Web
 {

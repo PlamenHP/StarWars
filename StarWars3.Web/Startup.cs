@@ -1,5 +1,7 @@
-﻿using Microsoft.Owin;
+﻿
+using Microsoft.Owin;
 using Owin;
+using StarWars3.Data;
 
 [assembly: OwinStartupAttribute(typeof(StarWars3.Web.Startup))]
 namespace StarWars3.Web
@@ -9,6 +11,8 @@ namespace StarWars3.Web
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            var context = new StarWars3Context();
+            context.Database.Initialize(true);
         }
     }
 }

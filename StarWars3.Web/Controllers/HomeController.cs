@@ -9,7 +9,7 @@ namespace StarWars3.Web.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return Redirect("Game");
+                return RedirectToAction("Index","Game");
             }
 
             return View();
