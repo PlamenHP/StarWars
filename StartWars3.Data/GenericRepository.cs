@@ -72,6 +72,11 @@ namespace StarWars3.Data
             }
         }
 
+        public virtual bool Any(Func<T,bool> predicate)
+        {
+            return this.DbSet.Any(predicate);
+        }
+
         public virtual void Delete(int id)
         {
             var entity = this.GetById(id);
@@ -80,6 +85,11 @@ namespace StarWars3.Data
             {
                 this.Delete(entity);
             }
+        }
+
+        public T FirstOrDefault(Func<T, bool> predicate)
+        {
+            return this.DbSet.FirstOrDefault(predicate);
         }
     }
 }

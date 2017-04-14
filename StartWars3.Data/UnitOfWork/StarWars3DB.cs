@@ -28,7 +28,7 @@ namespace StartWars3.Data.UnitOfWork
 
             this.starWars3DB = starWars3Contect;
         }
-
+        
         public IRepository<CreateUnit> CreateUnits => (createUnits ?? (this.createUnits = new GenericRepository<CreateUnit>(starWars3DB)));
         public IRepository<LevelUpgradePrice> EngineeringLevelsPrices => (engineeringLevelsPrices ?? (this.engineeringLevelsPrices = new GenericRepository<LevelUpgradePrice>(starWars3DB)));
         public IRepository<Factory> Factories => (factories ?? (this.factories = new GenericRepository<Factory>(starWars3DB)));
@@ -39,5 +39,10 @@ namespace StartWars3.Data.UnitOfWork
         public IRepository<ResurceBuildingsLevel> ResurceBuildingsLevels => (resurceBuildingsLevels ?? (this.resurceBuildingsLevels = new GenericRepository<ResurceBuildingsLevel>(starWars3DB)));
         public IRepository<UnitLevel> UnitLevels => (unitLevels ?? (this.unitLevels = new GenericRepository<UnitLevel>(starWars3DB)));
         public IRepository<Unit> Units => (units ?? (this.units = new GenericRepository<Unit>(starWars3DB)));
+
+        public void SaveChanges()
+        {
+            this.starWars3DB.SaveChanges();
+        }
     }
 }

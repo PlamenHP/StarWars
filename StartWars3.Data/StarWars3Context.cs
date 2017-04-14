@@ -37,7 +37,7 @@ namespace StarWars3.Data
         public virtual IDbSet<ResurceBuildingsLevel> ResurceBuildingsLevels { get; set; }
         public virtual IDbSet<UnitLevel> UnitLevels { get; set; }
         public virtual IDbSet<Unit> Units { get; set; }
-
+        
         public override int SaveChanges()
         {
             return base.SaveChanges();

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using StarWars3.Web.ViewModels;
+using StarWars3.Models;
 
 namespace StarWars3.Web.Controllers
 {

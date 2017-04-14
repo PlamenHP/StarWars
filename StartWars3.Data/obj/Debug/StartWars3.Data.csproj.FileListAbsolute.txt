@@ -10,3 +10,7 @@ C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\bin\Debug\EntityFramewor
 C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\obj\Debug\StartWars3.Data.dll
 C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\obj\Debug\StartWars3.Data.pdb
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\user\Documents\GitHub\StarWars\StartWars3.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml

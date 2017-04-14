@@ -51,7 +51,9 @@
   <ItemGroup>
     <Compile Include="Game\InitialiseUser.cs" />
     <Compile Include="Game\PlanetService.cs" />
+    <Compile Include="Game\PlayerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicesDTO\ResourcesAmontDTO.cs" />
     <Compile Include="Utilities\Constants.cs" />
   </ItemGroup>
   <ItemGroup>

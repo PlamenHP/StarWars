@@ -3,24 +3,24 @@ namespace StarWars3.Services.Game
 {
     using Data;
     using Models;
+    using StartWars3.Data.UnitOfWork;
     using System.Linq;
     using Utilities;
 
     public class InitialiseUser
     {
-        public static int Initialise(string aspNetId)
+        public static int Initialise(string aspNetId, IStarWars3DB context )
         {
-            var context = new StarWars3Context();
             int playerId;
 
-            if (!(context.Players.Any(p=>p.AspNetId == aspNetId)))
+            if (!(context.Players.Any(p => p.AspNetId == aspNetId)))
             {
 
                 Factory gasFactory = new Factory()
                 {
                     FactoryType = FactoryType.GasFactory,
                     Health = Constants.GasFactoryHealth,
-                    Level = Constants.DefaultFactoryLevel         
+                    Level = Constants.DefaultFactoryLevel
                 };
 
                 Factory metalFactory = new Factory()
@@ -54,7 +54,7 @@ namespace StarWars3.Services.Game
                 Planet planet = new Planet()
                 {
                     Name = "Earth",
-                    Factories = new []
+                    Factories = new[]
                     {
                         gasFactory,
                         metalFactory,
@@ -67,13 +67,13 @@ namespace StarWars3.Services.Game
                 context.Players.Add(new Player()
                 {
                     AspNetId = aspNetId,
-                    Planets = new[] { planet}             
+                    Planets = new[] { planet }
                 });
 
                 context.SaveChanges();
             }
 
-            playerId = context.Players.FirstOrDefault(p => p.AspNetId == aspNetId).Id;
+            playerId = context.Players.FirstOrDefault(p=>p.AspNetId == aspNetId).Id;
 
             return playerId;
         }

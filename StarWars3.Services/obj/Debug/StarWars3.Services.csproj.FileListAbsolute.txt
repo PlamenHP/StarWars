@@ -12,3 +12,7 @@ C:\Users\user\Documents\GitHub\StarWars\StarWars3.Services\bin\Debug\EntityFrame
 C:\Users\user\Documents\GitHub\StarWars\StarWars3.Services\obj\Debug\StarWars3.Services.csprojResolveAssemblyReference.cache
 C:\Users\user\Documents\GitHub\StarWars\StarWars3.Services\obj\Debug\StarWars3.Services.dll
 C:\Users\user\Documents\GitHub\StarWars\StarWars3.Services\obj\Debug\StarWars3.Services.pdb
+C:\Users\user\Documents\GitHub\StarWars\StarWars3.Services\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\user\Documents\GitHub\StarWars\StarWars3.Services\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\user\Documents\GitHub\StarWars\StarWars3.Services\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\user\Documents\GitHub\StarWars\StarWars3.Services\bin\Debug\Microsoft.AspNet.Identity.Core.xml
