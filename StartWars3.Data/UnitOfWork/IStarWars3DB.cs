@@ -6,7 +6,7 @@ namespace StartWars3.Data.UnitOfWork
 
     public interface IStarWars3DB
     {
-        IRepository<ApplicationUser> Users { get; }
+        IRepository<ApplicationUser> ApplicationUsers { get; }
 
         IRepository<CreateUnit> CreateUnits { get; }
 

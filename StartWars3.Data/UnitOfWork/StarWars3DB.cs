@@ -8,6 +8,7 @@ namespace StartWars3.Data.UnitOfWork
     class StarWars3DB: IStarWars3DB
     {
         private readonly IStarWars3Context starWars3DB;
+        private IRepository<ApplicationUser> applicationUsers;
         private IRepository<CreateUnit> createUnits;
         private IRepository<LevelUpgradePrice> engineeringLevelsPrices;
         private IRepository<Factory> factories;
@@ -28,7 +29,8 @@ namespace StartWars3.Data.UnitOfWork
 
             this.starWars3DB = starWars3Contect;
         }
-        
+
+        public IRepository<ApplicationUser> ApplicationUsers => (applicationUsers ?? (this.applicationUsers = new GenericRepository<ApplicationUser>(starWars3DB)));
         public IRepository<CreateUnit> CreateUnits => (createUnits ?? (this.createUnits = new GenericRepository<CreateUnit>(starWars3DB)));
         public IRepository<LevelUpgradePrice> EngineeringLevelsPrices => (engineeringLevelsPrices ?? (this.engineeringLevelsPrices = new GenericRepository<LevelUpgradePrice>(starWars3DB)));
         public IRepository<Factory> Factories => (factories ?? (this.factories = new GenericRepository<Factory>(starWars3DB)));
