@@ -1,6 +1,7 @@
 ﻿namespace StarWars3.Web.Controllers
 {
     using AutoMapper;
+    using Infrastructure.Mapping;
     using Models;
     using StartWars3.Data.UnitOfWork;
     using System;
@@ -42,7 +43,7 @@
             if (requestContext.HttpContext.User.Identity.IsAuthenticated)
             {
                 var userName = requestContext.HttpContext.User.Identity.Name;
-                var user = this.Data.Users.All().FirstOrDefault(x => x.UserName == userName);
+                var user = this.Data.ApplicationUsers.FirstOrDefault(x => x.UserName == userName);
                 this.UserProfile = user;
             }
 

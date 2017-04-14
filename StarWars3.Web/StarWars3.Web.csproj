@@ -275,6 +275,10 @@
       <Project>{cdd6e0dd-1eb4-47e8-b876-a74807632dbe}</Project>
       <Name>StartWars3.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StarWars3.Infrastructure\StarWars3.Infrastructure.csproj">
+      <Project>{128FA028-47F6-4DA2-B298-EF47CE142D1F}</Project>
+      <Name>StarWars3.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StarWars3.Models\StarWars3.Models.csproj">
       <Project>{cd6f20d2-1e20-4220-9425-88df836a4e07}</Project>
       <Name>StarWars3.Models</Name>

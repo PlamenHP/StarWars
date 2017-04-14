@@ -1,4 +1,4 @@
-﻿namespace OnlineStore.Infrastructure.Mapping
+﻿namespace StarWars3.Infrastructure.Mapping
 {
     using System;
     using System.Linq;
