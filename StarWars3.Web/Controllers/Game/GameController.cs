@@ -15,7 +15,7 @@ namespace StarWars3.Web.Controllers.Game
         public ActionResult Index()
         {
 
-            int playerId = InitialiseUser.Initialise(User.Identity.GetUserId());
+            int playerId = InitialiseUser.Initialise(User.Identity.GetUserId(), );
 
             return Redirect($"Game/Planet/{playerId}");
         }

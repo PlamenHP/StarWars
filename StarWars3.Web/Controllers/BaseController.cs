@@ -1,5 +1,6 @@
 ﻿namespace StarWars3.Web.Controllers
 {
+    using AutoMapper;
     using Models;
     using StartWars3.Data.UnitOfWork;
     using System;
@@ -7,13 +8,11 @@
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
+    using System.Web.Routing;
 
     public abstract class BaseController : Controller
     {
-        private IStarWars3DB data;
-        private ApplicationUser userProfile;
-
-        protected BaseController(IStoreDb data)
+        protected BaseController(IStarWars3DB data)
         {
             if (data == null)
             {
@@ -23,7 +22,7 @@
             this.Data = data;
         }
 
-        protected BaseController(IStoreDb data, ApplicationUser userProfile)
+        protected BaseController(IStarWars3DB data, ApplicationUser userProfile)
             : this(data)
         {
             if (userProfile == null)
@@ -34,7 +33,7 @@
             this.UserProfile = userProfile;
         }
 
-        protected IStoreDb Data { get; private set; }
+        protected IStarWars3DB Data { get; private set; }
 
         protected ApplicationUser UserProfile { get; private set; }
 
