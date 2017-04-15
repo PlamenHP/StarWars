@@ -7,6 +7,7 @@ namespace StarWars3.Web.Controllers.Game
     using ViewModels.Game;
     using StartWars3.Data.UnitOfWork;
     using Services.ServicesDTO;
+    using System;
 
     public class GameController : BaseController
     {
@@ -19,14 +20,19 @@ namespace StarWars3.Web.Controllers.Game
 
             int playerId = InitialisePlayer.Initialise(User.Identity.GetUserId(), Data);
 
-            return Redirect($"Game/ShowGame/{playerId}");
+            return RedirectToAction("ShowGame",new {playerId});
         }
 
         // GET: Planet
-        public ActionResult ShowGame(int playerId)
+        public ActionResult ShowGame(int? playerId)
         {
-            MapDTO mapDTO = PlayerService.GetMap(Data, playerId);
-            PlayerResourcesDTO playerResourcesDto = PlayerService.GetPlayerResources(Data, playerId);
+            if (playerId == null)
+            {
+                throw new ArgumentException("ShowGame: PlayerId cannot be null");
+            }
+
+            MapDTO mapDTO = PlayerService.GetMap(Data, (int)playerId);
+            PlayerResourcesDTO playerResourcesDto = PlayerService.GetPlayerResources(Data, (int)playerId);
             ShowGameViewModel showGameVieModel = new ShowGameViewModel()
             {
                 mapDto = mapDTO,
