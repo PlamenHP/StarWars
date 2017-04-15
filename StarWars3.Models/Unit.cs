@@ -32,5 +32,8 @@ namespace StarWars3.Models
 
         public int UnitLevelId { get; set; }
         public virtual UnitLevel UnitLevel { get; set; }
+
+        public int LocationId { get; set; }
+        public virtual Cell Location { get; set; }
     }
 }

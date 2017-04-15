@@ -19,6 +19,9 @@ namespace StartWars3.Data.UnitOfWork
         private IRepository<ResurceBuildingsLevel> resurceBuildingsLevels;
         private IRepository<UnitLevel> unitLevels;
         private IRepository<Unit> units;
+        private IRepository<Cell> cells;
+        private IRepository<Map> maps;
+
 
         public StarWars3DB(IStarWars3Context starWars3Contect)
         {
@@ -30,6 +33,8 @@ namespace StartWars3.Data.UnitOfWork
             this.starWars3DB = starWars3Contect;
         }
 
+        public IRepository<Cell> Cells => (cells ?? (this.cells = new GenericRepository<Cell>(starWars3DB)));
+        public IRepository<Map> Maps => (maps ?? (this.maps = new GenericRepository<Map>(starWars3DB)));
         public IRepository<ApplicationUser> ApplicationUsers => (applicationUsers ?? (this.applicationUsers = new GenericRepository<ApplicationUser>(starWars3DB)));
         public IRepository<CreateUnit> CreateUnits => (createUnits ?? (this.createUnits = new GenericRepository<CreateUnit>(starWars3DB)));
         public IRepository<LevelUpgradePrice> EngineeringLevelsPrices => (engineeringLevelsPrices ?? (this.engineeringLevelsPrices = new GenericRepository<LevelUpgradePrice>(starWars3DB)));

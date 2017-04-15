@@ -9,13 +9,18 @@ namespace StarWars3.Web.Controllers.Game
     using System.Web.Mvc;
     using ViewModels;
     using ViewModels.Game;
+    using StartWars3.Data.UnitOfWork;
 
-    public class GameController : Controller
+    public class GameController : BaseController
     {
+        protected GameController(IStarWars3DB data) : base(data)
+        {
+        }
+
         public ActionResult Index()
         {
 
-            int playerId = InitialiseUser.Initialise(User.Identity.GetUserId(), );
+            int playerId = InitialiseUser.Initialise(User.Identity.GetUserId(), Data);
 
             return Redirect($"Game/Planet/{playerId}");
         }

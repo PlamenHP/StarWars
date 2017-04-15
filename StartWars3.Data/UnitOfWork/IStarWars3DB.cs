@@ -28,6 +28,10 @@ namespace StartWars3.Data.UnitOfWork
 
         IRepository<Unit> Units { get; }
 
+        IRepository<Cell> Cells { get; }
+
+        IRepository<Map> Maps { get; }
+
         void SaveChanges();
     }
 }

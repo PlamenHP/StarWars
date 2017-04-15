@@ -15,5 +15,8 @@ namespace StarWars3.Models
 
         public int? PlanetId { get; set; }
         public virtual Planet Planet { get; set; }
+
+        public int LocationId { get; set; }
+        public virtual Cell Location { get; set; }
     }
 }

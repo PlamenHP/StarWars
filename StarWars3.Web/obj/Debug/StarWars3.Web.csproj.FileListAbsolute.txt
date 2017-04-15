@@ -73,3 +73,9 @@ C:\Users\user\Documents\GitHub\StarWars\StarWars3.Web\obj\Debug\StarWars3.Web.dl
 C:\Users\user\Documents\GitHub\StarWars\StarWars3.Web\obj\Debug\StarWars3.Web.pdb
 C:\Users\user\Documents\GitHub\StarWars\StarWars3.Web\bin\StarWars3.Services.dll
 C:\Users\user\Documents\GitHub\StarWars\StarWars3.Web\bin\StarWars3.Services.pdb
+C:\Users\user\Documents\GitHub\StarWars\StarWars3.Web\bin\AutoMapper.dll
+C:\Users\user\Documents\GitHub\StarWars\StarWars3.Web\bin\Ninject.dll
+C:\Users\user\Documents\GitHub\StarWars\StarWars3.Web\bin\StarWars3.Infrastructure.dll
+C:\Users\user\Documents\GitHub\StarWars\StarWars3.Web\bin\StarWars3.Infrastructure.pdb
+C:\Users\user\Documents\GitHub\StarWars\StarWars3.Web\bin\AutoMapper.xml
+C:\Users\user\Documents\GitHub\StarWars\StarWars3.Web\bin\Ninject.xml

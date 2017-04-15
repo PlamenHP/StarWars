@@ -10,7 +10,8 @@ namespace StarWars3.Models
     {
         public Planet()
         {
-            this.Factories = new HashSet<Factory>();
+            Factories = new HashSet<Factory>();
+            Locations = new HashSet<Cell>();
         }
 
         public int Id { get; set; }
@@ -25,5 +26,7 @@ namespace StarWars3.Models
         public virtual Image Image { get; set; }
 
         public virtual ICollection<Factory> Factories { get; set; }
+
+        public virtual ICollection<Cell> Locations { get; set; }
     }
 }

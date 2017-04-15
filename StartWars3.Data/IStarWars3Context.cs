@@ -9,6 +9,8 @@ namespace StartWars3.Data
     public interface IStarWars3Context : IDisposable
     {
         IDbSet<CreateUnit> CreateUnits { get; set; }
+        IDbSet<Cell> Cells { get; set; }
+        IDbSet<Map> Maps { get; set; }
         IDbSet<LevelUpgradePrice> EngineeringLevelsPrices { get; set; }
         IDbSet<Factory> Factories { get; set; }
         IDbSet<Image> Images { get; set; }

@@ -58,12 +58,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
+    <Compile Include="Cell.cs" />
     <Compile Include="CreateUnit.cs" />
     <Compile Include="EngineeringFactory.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="FactoryType.cs" />
+    <Compile Include="GameObject.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="LevelUpgradePrice.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="Planet.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Price.cs" />
