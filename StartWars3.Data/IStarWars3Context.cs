@@ -1,8 +1,8 @@
-﻿using StarWars3.Models;
-using System;
-
+﻿
 namespace StartWars3.Data
 {
+    using StarWars3.Models;
+    using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
 

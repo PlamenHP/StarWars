@@ -2,6 +2,7 @@
 namespace StarWars3.Services.Game
 {
     using Models;
+    using ServicesDTO;
     using StartWars3.Data.UnitOfWork;
     using System;
     using System.Collections.Generic;
@@ -11,9 +12,18 @@ namespace StarWars3.Services.Game
 
     public static class PlayerService
     {
-        public static void GetResourcesAmount(int id)
+        public static PlayerResourcesDTO GetPlayerResources(IStarWars3DB context,int playerId)
         {
+            var player = context.Players.GetById(playerId);
 
+            PlayerResourcesDTO playerResourcesDto = new PlayerResourcesDTO()
+            {
+                Gas = player.Gas,
+                Metal = player.Metal,
+                Minerals = player.Minerals
+            };
+
+            return playerResourcesDto;
         }
 
         public static bool IfNoOtherPlayers(IStarWars3DB context)
@@ -21,9 +31,25 @@ namespace StarWars3.Services.Game
             return context.Players.All() == null;
         }
 
-        public static Map GetMapSize(IStarWars3DB context, string mapName)
+        public static MapDTO GetMap(IStarWars3DB context, int playerId)
         {
-            return context.Maps.FirstOrDefault(m => m.Name == mapName);
+            var map = context.Players.GetById(playerId).Map;
+
+            MapDTO mapDto = new MapDTO()
+            {
+                Col = map.Cols,
+                Row = map.Rows
+            };
+
+            var units = context.Units.All().Select(u=>new GameObjectDTO(){Id=u.Id,Image = u.Image, Location = new[] { u.Location } }).ToList();
+            var factories = context.Factories.All().Select(u => new GameObjectDTO() { Id = u.Id, Image = u.Image, Location = new[] { u.Location } }).ToList();
+            var planets = context.Planets.All().Select(u => new GameObjectDTO() { Id = u.Id, Image = u.Image, Location = u.Locations }).ToList();
+
+            mapDto.GameObjects.AddRange(units);
+            mapDto.GameObjects.AddRange(factories);
+            mapDto.GameObjects.AddRange(planets);
+
+            return mapDto;
         }
     }
 }

@@ -49,10 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\InitialiseUser.cs" />
+    <Compile Include="Game\InitialisePlayer.cs" />
     <Compile Include="Game\PlanetService.cs" />
     <Compile Include="Game\PlayerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicesDTO\GameObjectDTO.cs" />
+    <Compile Include="ServicesDTO\MapDTO.cs" />
+    <Compile Include="ServicesDTO\PlayerResourcesDTO.cs" />
     <Compile Include="ServicesDTO\ResourcesAmontDTO.cs" />
     <Compile Include="Utilities\Constants.cs" />
   </ItemGroup>

@@ -2,6 +2,11 @@
 {
     public static class Constants
     {
+        //player resources
+        public const int InitialPlayerGas = 100;
+        public const int InitialPlayerMetal = 100;
+        public const int InitialPlayerMinerals = 100;
+
         // Factory constants
         public const int GasFactoryHealth = 100;
         public const int MetalFactoryHealth = 100;

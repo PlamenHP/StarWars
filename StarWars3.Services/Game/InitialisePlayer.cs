@@ -8,7 +8,7 @@ namespace StarWars3.Services.Game
     using System.Linq;
     using Utilities;
 
-    public class InitialiseUser
+    public class InitialisePlayer
     {
         public static int Initialise(string aspNetId, IStarWars3DB context )
         {
@@ -88,7 +88,11 @@ namespace StarWars3.Services.Game
                 context.Players.Add(new Player()
                 {
                     AspNetId = aspNetId,
-                    Planets = new[] { planet }
+                    Planets = new[] { planet },
+                    MapId = context.Maps.All().First().Id,
+                    Gas = Constants.InitialPlayerGas,
+                    Metal = Constants.InitialPlayerMetal,
+                    Minerals = Constants.InitialPlayerMinerals
                 });
 
                 context.SaveChanges();

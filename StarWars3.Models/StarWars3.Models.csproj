@@ -63,7 +63,6 @@
     <Compile Include="EngineeringFactory.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="FactoryType.cs" />
-    <Compile Include="GameObject.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="LevelUpgradePrice.cs" />
     <Compile Include="Map.cs" />

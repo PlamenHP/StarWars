@@ -5,9 +5,9 @@ namespace StartWars3.Data.UnitOfWork
     using StarWars3.Models;
     using System;
 
-    class StarWars3DB: IStarWars3DB
+    public class StarWars3DB: IStarWars3DB
     {
-        private readonly IStarWars3Context starWars3DB;
+        private readonly IStarWars3Context starWars3Context;
         private IRepository<ApplicationUser> applicationUsers;
         private IRepository<CreateUnit> createUnits;
         private IRepository<LevelUpgradePrice> engineeringLevelsPrices;
@@ -30,26 +30,26 @@ namespace StartWars3.Data.UnitOfWork
                 throw new ArgumentException("An instance of starWars3Contect is required to use this unit of work.", "starWars3Contect");
             }
 
-            this.starWars3DB = starWars3Contect;
+            this.starWars3Context = starWars3Contect;
         }
 
-        public IRepository<Cell> Cells => (cells ?? (this.cells = new GenericRepository<Cell>(starWars3DB)));
-        public IRepository<Map> Maps => (maps ?? (this.maps = new GenericRepository<Map>(starWars3DB)));
-        public IRepository<ApplicationUser> ApplicationUsers => (applicationUsers ?? (this.applicationUsers = new GenericRepository<ApplicationUser>(starWars3DB)));
-        public IRepository<CreateUnit> CreateUnits => (createUnits ?? (this.createUnits = new GenericRepository<CreateUnit>(starWars3DB)));
-        public IRepository<LevelUpgradePrice> EngineeringLevelsPrices => (engineeringLevelsPrices ?? (this.engineeringLevelsPrices = new GenericRepository<LevelUpgradePrice>(starWars3DB)));
-        public IRepository<Factory> Factories => (factories ?? (this.factories = new GenericRepository<Factory>(starWars3DB)));
-        public IRepository<Image> Images => (images ?? (this.images = new GenericRepository<Image>(starWars3DB)));
-        public IRepository<Planet> Planets => (planets ?? (this.planets = new GenericRepository<Planet>(starWars3DB)));
-        public IRepository<Player> Players => (players ?? (this.players = new GenericRepository<Player>(starWars3DB)));
-        public IRepository<Price> Prices => (prices ?? (this.prices = new GenericRepository<Price>(starWars3DB)));
-        public IRepository<ResurceBuildingsLevel> ResurceBuildingsLevels => (resurceBuildingsLevels ?? (this.resurceBuildingsLevels = new GenericRepository<ResurceBuildingsLevel>(starWars3DB)));
-        public IRepository<UnitLevel> UnitLevels => (unitLevels ?? (this.unitLevels = new GenericRepository<UnitLevel>(starWars3DB)));
-        public IRepository<Unit> Units => (units ?? (this.units = new GenericRepository<Unit>(starWars3DB)));
+        public IRepository<Cell> Cells => (cells ?? (this.cells = new GenericRepository<Cell>(starWars3Context)));
+        public IRepository<Map> Maps => (maps ?? (this.maps = new GenericRepository<Map>(starWars3Context)));
+        public IRepository<ApplicationUser> ApplicationUsers => (applicationUsers ?? (this.applicationUsers = new GenericRepository<ApplicationUser>(starWars3Context)));
+        public IRepository<CreateUnit> CreateUnits => (createUnits ?? (this.createUnits = new GenericRepository<CreateUnit>(starWars3Context)));
+        public IRepository<LevelUpgradePrice> EngineeringLevelsPrices => (engineeringLevelsPrices ?? (this.engineeringLevelsPrices = new GenericRepository<LevelUpgradePrice>(starWars3Context)));
+        public IRepository<Factory> Factories => (factories ?? (this.factories = new GenericRepository<Factory>(starWars3Context)));
+        public IRepository<Image> Images => (images ?? (this.images = new GenericRepository<Image>(starWars3Context)));
+        public IRepository<Planet> Planets => (planets ?? (this.planets = new GenericRepository<Planet>(starWars3Context)));
+        public IRepository<Player> Players => (players ?? (this.players = new GenericRepository<Player>(starWars3Context)));
+        public IRepository<Price> Prices => (prices ?? (this.prices = new GenericRepository<Price>(starWars3Context)));
+        public IRepository<ResurceBuildingsLevel> ResurceBuildingsLevels => (resurceBuildingsLevels ?? (this.resurceBuildingsLevels = new GenericRepository<ResurceBuildingsLevel>(starWars3Context)));
+        public IRepository<UnitLevel> UnitLevels => (unitLevels ?? (this.unitLevels = new GenericRepository<UnitLevel>(starWars3Context)));
+        public IRepository<Unit> Units => (units ?? (this.units = new GenericRepository<Unit>(starWars3Context)));
 
         public void SaveChanges()
         {
-            this.starWars3DB.SaveChanges();
+            this.starWars3Context.SaveChanges();
         }
     }
 }

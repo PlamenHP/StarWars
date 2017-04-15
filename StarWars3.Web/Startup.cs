@@ -11,8 +11,8 @@ namespace StarWars3.Web
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            var context = new StarWars3Context();
-            context.Database.Initialize(true);
+          //  var context = new StarWars3Context();
+          //  context.Database.Initialize(true);
         }
     }
 }

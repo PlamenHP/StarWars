@@ -20,9 +20,12 @@ namespace StarWars3.Models
         [StringLength(50)]
         public string Name { get; set; }
 
-        public int? Metal { get; set; }
-        public int? Gas { get; set; }
-        public int? Minerals { get; set; }
+        public int MapId { get; set; }
+        public virtual Map Map { get; set; }
+
+        public int Metal { get; set; }
+        public int Gas { get; set; }
+        public int Minerals { get; set; }
 
         public int? IncomeMetalTime { get; set; }
         public int? IncomeMetalAmount { get; set; }
