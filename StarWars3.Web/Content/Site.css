@@ -20,3 +20,14 @@ body {
 	background-repeat:no-repeat ;
 	display: compact;
 }
+#hexmap
+{
+	background-image: url("http://a1star.com/images/00-star-space-hubble-tile-pleiades.jpg");
+	/*margin: auto;*/
+    /*display:block;
+	margin: auto;*/
+}
+.containerSize {
+    position: relative;
+    /*width: 100%;*/
+}

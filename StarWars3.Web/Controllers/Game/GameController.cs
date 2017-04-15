@@ -19,7 +19,7 @@ namespace StarWars3.Web.Controllers.Game
         {
 
             int playerId = InitialisePlayer.Initialise(User.Identity.GetUserId(), Data);
-
+    
             return RedirectToAction("ShowGame",new {playerId});
         }
 

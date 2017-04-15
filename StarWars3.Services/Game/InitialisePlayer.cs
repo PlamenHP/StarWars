@@ -4,6 +4,7 @@ namespace StarWars3.Services.Game
     using Data;
     using Models;
     using StartWars3.Data.UnitOfWork;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Utilities;
@@ -12,7 +13,7 @@ namespace StarWars3.Services.Game
     {
         public static int Initialise(string aspNetId, IStarWars3DB context )
         {
-            int playerId;
+            int? playerId;
 
             if (!(context.Players.Any(p => p.AspNetId == aspNetId)))
             {
@@ -112,7 +113,12 @@ namespace StarWars3.Services.Game
 
             playerId = context.Players.FirstOrDefault(p=>p.AspNetId == aspNetId).Id;
 
-            return playerId;
+            if (playerId == null)
+            {
+                throw new ArgumentException("Initialise: PlayerId cannot be null");
+            }
+
+            return (int)playerId;
         }
 
         private bool IsExistingPlayer(int? id)
