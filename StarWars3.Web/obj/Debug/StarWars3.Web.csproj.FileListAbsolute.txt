@@ -170,3 +170,7 @@ D:\Documents\StarWars\StarWars3.Web\bin\Microsoft.Owin.Security.MicrosoftAccount
 D:\Documents\StarWars\StarWars3.Web\obj\Debug\StarWars3.Web.csprojResolveAssemblyReference.cache
 D:\Documents\StarWars\StarWars3.Web\obj\Debug\StarWars3.Web.dll
 D:\Documents\StarWars\StarWars3.Web\obj\Debug\StarWars3.Web.pdb
+C:\Users\user\Documents\GitHub\StarWars\StarWars3.Web\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\user\Documents\GitHub\StarWars\StarWars3.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\user\Documents\GitHub\StarWars\StarWars3.Web\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\user\Documents\GitHub\StarWars\StarWars3.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml

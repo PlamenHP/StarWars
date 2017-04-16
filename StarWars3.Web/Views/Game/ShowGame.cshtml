@@ -1,29 +1,41 @@
 ﻿@using StarWars3.Web.Controllers;
-@model StarWars3.Web.ViewModels.Game.ShowGameViewModel
+@model StarWars3.Web.ViewModels.Game.PlayerId
 @{
 	ViewBag.Title = "ShowGame";
 }
 
 <div class="containerStyle well">
-		<table>
-			<tr>
-				<td class="menuStyle well" height="700">
-					<ul>
-						<li class="active"><a href="#">Planet <span class="sr-only">(current)</span></a></li>
-						<li><a href="#">Units</a></li>
-						<li><a href="#">Upgrades</a></li>
-					</ul>
-				</td>
-				<td>
-					<canvas class="canvas" id="hexmap" width="1024" height="700"></canvas>
-				</td>
-		   </tr>
-      </table>
-	
-	@foreach (var gameObject in Model.mapDto.GameObjects)
-	{
-		<script type="text/javascript">
-			drawImage(canvasContext, x, y, width, height, sideLength);
-		</script>
-	}	
+	<table>
+		<tr>
+			<td class="container menuStyle well">
+				<input type="button" class="button" id="startGame" value="Start Game" />
+				<input type="button" class="button" id="showGame" value="Show Game" />
+			</td>
+			<td>
+				<canvas class="canvas" id="hexmap" width="1000" height="700"></canvas>
+			</td>
+		</tr>
+	</table>
+
+	<script type="text/javascript">
+		$(document.ready = (function () {
+			$.connection.hub.start();
+
+			var game = $.connection.game;
+
+			$('#showGame').click(function () {
+					game.server.showGame(@Model.Id)
+			});
+
+			$('#regosterPlayer').click(function (msg) {
+				game.server.registerPlayer()
+			});
+
+			game.client.showGame = function (showGameVieModel) {
+
+			};
+
+		}));
+
+	</script>
 </div>

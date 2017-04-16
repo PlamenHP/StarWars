@@ -6,6 +6,7 @@
 	<title>@ViewBag.Title - STAR-WARS III</title>
 	@Styles.Render("~/Content/css")
 	@Scripts.Render("~/bundles/modernizr")
+	@Scripts.Render("~/bundles/jquery")
 
 	<script type="text/javascript">
 			var height = '@System.Configuration.ConfigurationManager.AppSettings["ImageHeight"]';
@@ -47,6 +48,8 @@
 
 	@Scripts.Render("~/bundles/jquery")
 	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/Scripts/jquery.signalR-2.2.1.js")
+	@Scripts.Render("~/signalr/hubs")
 	@RenderSection("scripts", required: false)
 </body>
 </html>

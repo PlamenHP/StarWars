@@ -11,6 +11,7 @@ namespace StarWars3.Web
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            app.MapSignalR();
             //var context = new StarWars3Context();
             //context.Database.Initialize(true);
         }

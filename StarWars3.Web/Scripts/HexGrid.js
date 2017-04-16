@@ -1,20 +1,23 @@
 ﻿window.onload = function () {
+
     var canvas = document.getElementById('hexmap');
 
     var hexHeight,
         hexRadius,
-        hexRectangleHeight,
-        hexRectangleWidth,
+        rectangleHeight,
+        rectangleWidth,
         hexagonAngle = 0.523598776, // 30 degrees in radians
-		boardWidth = 20,
-        boardHeight = 16;
-        sideLength = 1024 / boardWidth / 1.8,
+		cols = 20,
+        rows = 16,
+        boardWidth = 1000,
+        sideLength;
 
 
-    hexHeight = Math.sin(hexagonAngle) * sideLength;
-    hexRadius = Math.cos(hexagonAngle) * sideLength;
-    hexRectangleHeight = sideLength + 2 * hexHeight;
-    hexRectangleWidth = 2 * hexRadius;
+    rectangleWidth = (boardWidth / (cols+0.5));// hex width
+    sideLength = (rectangleWidth / 2) / Math.cos(hexagonAngle);
+    hexHeight = sideLength * 2;//Math.sin(hexagonAngle) * sideLength;
+    hexRadius = rectangleWidth/2;//Math.cos(hexagonAngle) * sideLength;
+    rectangleHeight = 2 * sideLength;//hex height
 
     if (canvas.getContext) {
         var ctx = canvas.getContext('2d');
@@ -23,7 +26,37 @@
         ctx.strokeStyle = "rgba(0, 200, 0, 0.2)";
         ctx.lineWidth = 1;
 
-        drawBoard(ctx, boardWidth, boardHeight);
+        drawBoard(ctx, cols, rows);
+
+        canvas.addEventListener("mousedown", function (eventInfo) {
+
+            var x,
+                y,
+                hexX,
+                hexY,
+                screenX,
+                screenY;
+
+            x = eventInfo.offsetX || eventInfo.layerX;
+            y = eventInfo.offsetY || eventInfo.layerY;
+            y = y - sideLength / 3;
+            hexY = Math.floor(y / (hexHeight - (sideLength / 2)));
+            hexX = Math.floor((x - (hexY % 2) * hexRadius) / (rectangleWidth));
+
+            screenX = (hexX * rectangleWidth) + ((hexY % 2) * hexRadius);
+            screenY = hexY * (hexHeight - (sideLength / 2));
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            drawBoard(ctx, cols, rows);
+
+            // Check if the mouse's coords are on the board
+            if (hexX >= 0 && hexX < cols) {
+                if (hexY >= 0 && hexY < rows) {
+                    drawImage(ctx, screenX, screenY, rectangleWidth, rectangleHeight, sideLength);
+                }
+            }
+        });
 
         canvas.addEventListener("mousemove", function (eventInfo) {
             var x,
@@ -35,48 +68,63 @@
 
             x = eventInfo.offsetX || eventInfo.layerX;
             y = eventInfo.offsetY || eventInfo.layerY;
+            y = y - sideLength / 3;
+            hexY = Math.floor(y / (hexHeight - (sideLength / 2)));
+            hexX = Math.floor((x - (hexY % 2) * hexRadius) / (rectangleWidth));
 
-
-            hexY = Math.floor(y / (hexHeight + sideLength));
-            hexX = Math.floor((x - (hexY % 2) * hexRadius) / hexRectangleWidth);
-
-            screenX = hexX * hexRectangleWidth + ((hexY % 2) * hexRadius);
-            screenY = hexY * (hexHeight + sideLength);
+            screenX = (hexX * rectangleWidth) + ((hexY % 2) * hexRadius);
+            screenY = hexY * (hexHeight - (sideLength / 2));
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            drawBoard(ctx, boardWidth, boardHeight);
+            drawBoard(ctx, cols, rows);
 
             // Check if the mouse's coords are on the board
-            if (hexX >= 0 && hexX < boardWidth) {
-                if (hexY >= 0 && hexY < boardHeight) {
+            if (hexX >= 0 && hexX < cols) {
+                if (hexY >= 0 && hexY < rows) {
                     ctx.fillStyle = "rgba(200, 0, 0, 0.4)";
                     drawHexagon(ctx, screenX, screenY, true);
-                    drawImage(ctx, screenX, screenY, hexRectangleWidth, hexRectangleHeight, sideLength);
+                    //drawImage(ctx, screenX, screenY, rectangleWidth, rectangleHeight, sideLength);
                 }
             }
         });
     }
 
-    function drawBoard(canvasContext, width, height) {
+    function drawBoard(canvasContext, cols, rows) {
         var i,
             j;
 
-        for (i = 0; i < width; ++i) {
-            for (j = 0; j < height; ++j) {
+        for (i = 0; i < cols; ++i) {
+            for (j = 0; j < rows; ++j) {
                 drawHexagon(
                     ctx,
-                    i * hexRectangleWidth + ((j % 2) * hexRadius),
-                    j * (sideLength + hexHeight),
+                    i * rectangleWidth + ((j % 2) * hexRadius),
+                    j * (hexHeight-(sideLength/2)),
                     false
                 );
             }
         }
     }
 
+    //function drawObjects(canvasContext, cols, rows) {
+    //    var i,
+    //        j;
+
+    //    for (i = 0; i < cols; ++i) {
+    //        for (j = 0; j < rows; ++j) {
+    //            drawHexagon(
+    //                ctx,
+    //                i * rectangleWidth + ((j % 2) * hexRadius),
+    //                j * (hexHeight - (sideLength / 2)),
+    //                false
+    //            );
+    //        }
+    //    }
+    //}
+
     function drawImage(canvasContext, x, y, width, height, sideLength) {
         var el = new Image();
-        el.src = "../../Content/icon.jpg";
+        el.src = "http://icons.iconarchive.com/icons/custom-icon-design/office/128/add-1-icon.png";
         y += height / 4;
         canvasContext.drawImage(el, x, y, width, sideLength);
     }
@@ -87,11 +135,11 @@
         /*ctx.setLineDash([6, 30]);/*dashes are ..px and spaces are ..px*/
         canvasContext.beginPath();
         canvasContext.moveTo(x + hexRadius, y);
-        canvasContext.lineTo(x + hexRectangleWidth, y + hexHeight);
-        canvasContext.lineTo(x + hexRectangleWidth, y + hexHeight + sideLength);
-        canvasContext.lineTo(x + hexRadius, y + hexRectangleHeight);
-        canvasContext.lineTo(x, y + sideLength + hexHeight);
-        canvasContext.lineTo(x, y + hexHeight);
+        canvasContext.lineTo(x + rectangleWidth, y + sideLength/2);
+        canvasContext.lineTo(x + rectangleWidth, y + sideLength / 2 + sideLength);
+        canvasContext.lineTo(x + hexRadius, y + rectangleHeight);
+        canvasContext.lineTo(x, y + sideLength / 2 + sideLength);
+        canvasContext.lineTo(x, y + sideLength / 2);
         canvasContext.closePath();
 
         if (fill) {

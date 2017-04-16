@@ -19,7 +19,7 @@ namespace StarWars3.Web.Controllers.Game
         {
 
             int playerId = InitialisePlayer.Initialise(User.Identity.GetUserId(), Data);
-    
+
             return RedirectToAction("ShowGame",new {playerId});
         }
 
@@ -31,14 +31,16 @@ namespace StarWars3.Web.Controllers.Game
                 throw new ArgumentException("ShowGame: PlayerId cannot be null");
             }
 
-            MapDTO mapDTO = PlayerService.GetMap(Data, (int)playerId);
-            PlayerResourcesDTO playerResourcesDto = PlayerService.GetPlayerResources(Data, (int)playerId);
-            ShowGameViewModel showGameVieModel = new ShowGameViewModel()
-            {
-                mapDto = mapDTO,
-                playerResourcesDto = playerResourcesDto
-            };
-            return View(showGameVieModel);
+            //MapDTO mapDTO = PlayerService.GetMap(Data, (int)playerId);
+            //PlayerResourcesDTO playerResourcesDto = PlayerService.GetPlayerResources(Data, (int)playerId);
+            //ShowGameViewModel showGameVieModel = new ShowGameViewModel()
+            //{
+            //    mapDto = mapDTO,
+            //    playerResourcesDto = playerResourcesDto
+            //};
+            //ViewBag.Id = playerId;
+            PlayerId pId = new PlayerId() { Id = playerId.ToString() };
+            return View(pId);
         }
     }
 }
