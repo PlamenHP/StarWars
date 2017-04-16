@@ -10,28 +10,11 @@
 
     public class Game : Hub
     {
-        public static List<Client> clients = new List<Client>();
-
-        private object syncRoot = new object();
-
         private IStarWars3DB data;
 
         public Game(IStarWars3DB data)
         {
             this.data = data;
-        }
-
-        public void RegisterClient(string msg)
-        {
-            lock (syncRoot)
-            {
-                var client = clients.FirstOrDefault(c => c.connectionId == Context.ConnectionId);
-                if (client == null)
-                {
-                    client = new Client() { connectionId = Context.ConnectionId };
-                    clients.Add(client);
-                }
-            }
         }
 
         public void ShowGame(string id)
@@ -45,12 +28,10 @@
                 playerResourcesDto = playerResourcesDto
             };
 
-            Clients.All.showGame(showGameVieModel);
-        }
-    }
+            
 
-    public class Client
-    {
-        public string connectionId { get; set; }
+            Clients.All.showGame(id);
+        }
+
     }
 }

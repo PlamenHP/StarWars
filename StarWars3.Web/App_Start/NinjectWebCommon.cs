@@ -13,6 +13,11 @@ namespace StarWars3.Web.App_Start
     using StartWars3.Data.UnitOfWork;
     using StartWars3.Data;
     using Data;
+    using Ninject.Web.Mvc;
+    using SignalR;
+    using Microsoft.AspNet.SignalR.Hubs;
+    using Microsoft.AspNet.SignalR.Infrastructure;
+    using Microsoft.AspNet.SignalR;
 
     public static class NinjectWebCommon 
     {
@@ -43,10 +48,12 @@ namespace StarWars3.Web.App_Start
         private static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
+
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
+                GlobalHost.DependencyResolver = new NinjectSignalRDependencyResolver(kernel);
 
                 RegisterServices(kernel);
                 return kernel;

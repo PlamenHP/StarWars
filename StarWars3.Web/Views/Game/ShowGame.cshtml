@@ -19,6 +19,7 @@
 
 	<script type="text/javascript">
 		$(document.ready = (function () {
+
 			$.connection.hub.start();
 
 			var game = $.connection.game;
@@ -27,14 +28,9 @@
 					game.server.showGame(@Model.Id)
 			});
 
-			$('#regosterPlayer').click(function (msg) {
-				game.server.registerPlayer()
-			});
-
-			game.client.showGame = function (showGameVieModel) {
-
+			game.client.showGame = function (id) {
+				alert(id)
 			};
-
 		}));
 
 	</script>
