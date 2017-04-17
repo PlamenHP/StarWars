@@ -60,21 +60,25 @@ namespace StarWars3.Services.Game
             return planets;
         }
 
-        public static bool LocationHasUnit(IStarWars3DB data, int row, int col)
+        public static bool LocationHasUnit(IStarWars3DB context, int row, int col)
         {
-            throw new NotImplementedException();
+            bool hasPlanet = context.Units.Any(l =>  l.Location.row == row && l.Location.col == col);
+
+            return hasPlanet;
         }
 
-        public static bool LocationHasBuilding(IStarWars3DB data, int row, int col)
+        public static bool LocationHasBuilding(IStarWars3DB context, int row, int col)
         {
-            throw new NotImplementedException();
+            bool hasPlanet = context.Factories.Any(l => l.Location.row == row && l.Location.col == col);
+
+            return hasPlanet;
         }
 
         public static bool LocationHasPlanet(IStarWars3DB context,int row, int col)
         {
             bool hasPlanet = context.Planets.Any(p=>p.Locations.Any(l=>l.row==row&&l.col==col));
 
-            return true;
+            return hasPlanet;
         }
 
         public static ICollection<BuildingDTO> GetBuildings(IStarWars3DB context)

@@ -73,6 +73,7 @@
     <Compile Include="ResurceBuildingsLevel.cs" />
     <Compile Include="Unit.cs" />
     <Compile Include="UnitLevel.cs" />
+    <Compile Include="UnitType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

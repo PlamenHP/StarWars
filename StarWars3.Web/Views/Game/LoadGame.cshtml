@@ -1,5 +1,5 @@
 ﻿@using StarWars3.Web.Controllers;
-@model StarWars3.Web.ViewModels.Game.LoadGameViewModel
+@model StarWars3.Web.ViewModels.Game.PlayerId
 @{
 	ViewBag.Title = "ShowGame";
 }
@@ -7,25 +7,31 @@
 <div class="containerStyle well">
 	<table>
 		<tr>
-			<td class="container menuStyle well">
+			<td class="container menuStyle">
 				<input type="button" class="button" id="showGame" value="Show Game" />
 
 				<div class="buildings" id="buildings">
-					<input type="button" class="buildings" id="gasFactory" value="Build Gas Factory" />
-					<input type="button" class="buildings" id="metalFactory" value="Build Metal Factory" />
-					<input type="button" class="buildings" id="cristalsFactory" value="Build Minerals Factory" />
+					<input type="button" class="buildings" id="buildGasFactory" value="Build Gas Factory" />
+					<input type="button" class="buildings" id="buildMetalFactory" value="Build Metal Factory" />
+					<input type="button" class="buildings" id="buildMineralsFactory" value="Build Minerals Factory" />
 				</div>
 
 				<div class="units" id="units">
-					<input type="button" class="units" id="deathStar" value="Build Death Star" />
-					<input type="button" class="units" id="destroyer" value="Build Destroyer" />
-					<input type="button" class="units" id="fighter" value="Build Fighter" />
+					@*<input type="button" class="units" id="buildDeathStar" value="Build Death Star" />
+					<input type="button" class="units" id="buildDestroyer" value="Build Destroyer" />*@
+					<input type="button" class="units" id="buildFighter" value="Build Fighter" />
+				</div>
+
+				<div class="unitsStats" id="unitsStats">
+					<div class="unitsStats">UNIT STATISTICS</div>
 				</div>
 
 				<span id="info"></span>
 			</td>
 			<td>
-				<canvas class="canvas" id="hexmap" width="1000" height="700"></canvas>
+				<div style="position: relative; width:1000px; height:700px">
+					<canvas class="canvas" id="hexmap" width="1000" height="700"></canvas>
+				</div>
 			</td>
 		</tr>
 	</table>
@@ -35,12 +41,11 @@
 	$(function () {
 		$("#buildings").hide();
 		$("#units").hide();
+		$("#unitsStats").hide();
 		//////////////////////
 		/////////////GAME OBJECTS
 		//////////////////////////
-		var planets = {};
-		var buildings = {};
-		var units = {};
+
 
 		///////////////////////////
 		/////////// SIGNALR JS
@@ -49,28 +54,65 @@
 
 		var game = $.connection.game;
 
-		$('#showGame').click(function ()
-		{
-			game.server.showGame();
-		});
 
-		game.client.showBuildingsMenu = function()
-		{
+		///////////////////////////////////////////////////////////////////
+		//// ON BOARD CLICK SHOW MENUS
+		//////////////////////////////////////////////////////////////////////////
+		game.client.showUnitsStats = function () {
 			$("#units").hide();
-			$("#buildings").show();
+			$("#buildings").hide();
+			$("#unitsStats").show();
+			$('#unitStats').append($("<div>").text("shield 20, attack 30, health 50"));
 		}
 
-		//game.client.showUnitsMenu()
-		//{
-		//	$("#units").show();
-		//	$("#buildings").hide();
-		//}
+		game.client.showUnitsMenu = function () {
+			$("#units").show();
+			$("#buildings").hide();
+			$("#unitsStats").hide();
+		}
+
+		game.client.showBuildingsMenu = function () {
+			$("#units").hide();
+			$("#buildings").show();
+			$("#unitsStats").hide();
+		}
+
+		game.client.hideMenu = function () {
+			$("#units").hide();
+			$("#buildings").hide();
+			$("#unitsStats").hide();
+		}
+
+
+		///////////////////////////////////////////////////////////////////
+		//// MENU BUTTONS EVENTS
+		//////////////////////////////////////////////////////////////////////////
+		$('#showGame').click(function ()
+		{
+			game.server.showGame(@Model.Id);
+		});
+		$('#buildGasFactory').click(function () {
+			game.server.buildGasFactory();
+		});
+
+		$('#buildMetalFactory').click(function () {
+			game.server.buildMetalFactory();
+		});
+
+		$('#buildMineralsFactory').click(function () {
+			game.server.buildMineralsFactory();
+		});
+
+		$('#buildFighter').click(function () {
+			game.server.buildFighter();
+		});
+
 
 		//////////////////////////////////////////////////////////////
-		///////////// HEX BOARD JS
+		///////////// HEX BOARD CANVAS AND VARIABLES INITIALISATIONS   (dont touch)
 		//////////////////////////////////////////////////////////////
-
 		var canvas = document.getElementById('hexmap');
+		var ctx = canvas.getContext('2d');
 
 		var hexHeight,
 			hexRadius,
@@ -83,26 +125,21 @@
 			sideLength,
 			gameObjects;
 
-
 		rectangleWidth = (boardWidth / (cols + 0.5));// hex width
 		sideLength = (rectangleWidth / 2) / Math.cos(hexagonAngle);
 		hexHeight = sideLength * 2;//Math.sin(hexagonAngle) * sideLength;
 		hexRadius = rectangleWidth / 2;//Math.cos(hexagonAngle) * sideLength;
 		rectangleHeight = 2 * sideLength;//hex height
 
+		/////// MOUSE EVENTS LISTENERS /////////
 		if (canvas.getContext)
 		{
-			var ctx = canvas.getContext('2d');
-
 			ctx.fillStyle = "rgba(200, 0, 0, 0.4)";
 			ctx.strokeStyle = "rgba(0, 200, 0, 0.2)";
 			ctx.lineWidth = 1;
 
-			//drawBoard(ctx, cols, rows);
-
 			canvas.addEventListener("mousedown", function (eventInfo)
 			{
-
 				var x,
 					y,
 					hexX,
@@ -121,17 +158,6 @@
 				screenY = hexY * (hexHeight - (sideLength / 2));
 
 				game.server.onMouseDown(hexY, hexX);
-
-				//ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-				//drawBoard(ctx, cols, rows);
-
-				//// Check if the mouse's coords are on the board
-				//if (hexX >= 0 && hexX < cols) {
-				//	if (hexY >= 0 && hexY < rows) {
-				//		drawImage(ctx, screenX, screenY, rectangleWidth, rectangleHeight, sideLength);
-				//	}
-				//}
 			});
 
 			canvas.addEventListener("mousemoveDisable", function (eventInfo)
@@ -167,29 +193,63 @@
 			});
 		}
 
-		game.client.drawGameObject = function (row, col)
+
+		////////////////////////////////////////////////////////////////////
+		///////////  DRAW GAME OBJECTS
+		///////////////////////////////////////////////////////////////////////
+
+		/// BASE DRAWING FUNCTION //////////////////////
+		function drawObject(row, col, ctxImage)
 		{
-			var canvas = document.getElementById('hexmap');
-
 			var x = (col * rectangleWidth) + ((row % 2) * hexRadius);
-			var y = row * (hexHeight - (sideLength / 2));
-
-			var el = new Image();
-			el.src = "http://icons.iconarchive.com/icons/custom-icon-design/office/128/add-1-icon.png";
-			y += sideLength / 4;
-
-			var ctx = canvas.getContext('2d');
+			var y = (row * (hexHeight - (sideLength / 2))) + (sideLength / 4);
 
 			ctx.fillStyle = "rgba(200, 0, 0, 0.4)";
 			ctx.strokeStyle = "rgba(0, 200, 0, 0.2)";
 			ctx.lineWidth = 1;
 
-			//drawBoard(ctx, 20, 16);
-			ctx.drawImage(el, x, y, rectangleWidth, sideLength);
+			ctx.drawImage(ctxImage, x, y, rectangleWidth, sideLength);
 		}
 
+		///////// SIGNALR OBJECTS DRAWING FUNCTIONS //////
+		game.client.drawPlanet = function (row, col)
+		{
+			var ctxImage = new Image();
+			ctxImage.src = "http://3.bp.blogspot.com/-d1vVOCsXAWc/UuAjYDtmmcI/AAAAAAAABVg/BhvRZH2GC4U/s1600/greenplanet.png";
+			drawObject(row, col, ctxImage)
+		}
 
-		game.client.drawBoard = function (canvasContext, cols, rows)
+		game.client.drawGasFactory = function (row, col)
+		{
+			var ctxImage = new Image();
+			ctxImage.src = "http://team-dignitas.net/uploads/tinymce/images/robo.png";
+			drawObject(row, col, ctxImage)
+		}
+
+		game.client.drawMetalFactory = function (row, col) {
+			var ctxImage = new Image();
+			ctxImage.src = "http://icons.iconarchive.com/icons/custom-icon-design/office/128/add-1-icon.png";
+			drawObject(row, col, ctxImage)
+		}
+
+		game.client.drawMineralsFactory = function (row, col) {
+			var ctxImage = new Image();
+			ctxImage.src = "http://icons.iconarchive.com/icons/custom-icon-design/office/128/add-1-icon.png";
+			drawObject(row, col, ctxImage)
+		}
+
+		game.client.drawFighter = function (row, col) {
+			var ctxImage = new Image();
+			ctxImage.src = "http://bricksafe.com/files/JBB_777/republic_strike_fighter/folding05.gif";
+			drawObject(row, col, ctxImage)
+		}
+
+		game.client.clearBoard = function ()
+		{
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+		}
+
+		game.client.drawBoard = function (rows,cols)
 		{
 			var i,
 				j;
@@ -206,30 +266,9 @@
 			}
 		}
 
-		//function drawObjects(canvasContext, cols, rows) {
-		//    var i,
-		//        j;
-
-		//    for (i = 0; i < cols; ++i) {
-		//        for (j = 0; j < rows; ++j) {
-		//            drawHexagon(
-		//                ctx,
-		//                i * rectangleWidth + ((j % 2) * hexRadius),
-		//                j * (hexHeight - (sideLength / 2)),
-		//                false
-		//            );
-		//        }
-		//    }
-		//}
-
-		function drawImage(canvasContext, x, y, width, height, sideLength)
-		{
-			var el = new Image();
-			el.src = "http://icons.iconarchive.com/icons/custom-icon-design/office/128/add-1-icon.png";
-			y += height / 4;
-			canvasContext.drawImage(el, x, y, width, sideLength);
-		}
-
+		///////////////////////////////////////////////////////////////
+		/////////// DRAW HEXAGON (dont touch)
+		//////////////////////////////////////////////////////////////
 		function drawHexagon(canvasContext, x, y, fill)
 		{
 			var fill = fill || false;
@@ -252,26 +291,5 @@
 		}
 	});
 
-
-
-	//window.onload = function ()
-	//{
-
-	//};
-
 </script>
-	@*@{
-		foreach (var gameObj in Model.mapDto.GameObjects)
-		{
-			foreach (var cell in gameObj.Location)
-			{
-
-				<script type="text/javascript">
-					drawGameObject(@cell.row,@cell.col);
-				</script>
-
-			}
-		}
-	}*@
-
 </div>

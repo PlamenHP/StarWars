@@ -17,42 +17,6 @@ namespace StarWars3.Services.Game
 
             if (!(context.Players.Any(p => p.AspNetId == aspNetId)))
             {
-
-                //Factory gasFactory = new Factory()
-                //{
-                //    FactoryType = FactoryType.GasFactory,
-                //    Health = Constants.GasFactoryHealth,
-                //    Level = Constants.DefaultFactoryLevel
-                //};
-
-                //Factory metalFactory = new Factory()
-                //{
-                //    FactoryType = FactoryType.MetalFactory,
-                //    Health = Constants.MetalFactoryHealth,
-                //    Level = Constants.DefaultFactoryLevel
-                //};
-
-                //Factory mineralsFactory = new Factory()
-                //{
-                //    FactoryType = FactoryType.MineralsFactory,
-                //    Health = Constants.MineralsFactoryHealth,
-                //    Level = Constants.DefaultFactoryLevel
-                //};
-
-                //Factory warFactory = new Factory()
-                //{
-                //    FactoryType = FactoryType.WarFactory,
-                //    Health = Constants.WarFactoryHealth,
-                //    Level = Constants.DefaultFactoryLevel
-                //};
-
-                //EngineeringFactory engineeringFactory = new EngineeringFactory()
-                //{
-                //    FactoryType = FactoryType.EngineeringFactory,
-                //    Health = Constants.EngineeringFactoryHealth,
-                //    Level = Constants.DefaultFactoryLevel
-                //};
-
                 Planet planet = new Planet()
                 {
                     Name = "Earth",

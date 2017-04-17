@@ -1,40 +1,43 @@
 ﻿namespace StarWars3.Web.SignalR
 {
     using Microsoft.AspNet.SignalR;
-    using Newtonsoft.Json;
+    using Models;
     using Services.Game;
     using Services.ServicesDTO;
+    using Services.Utilities;
     using StartWars3.Data.UnitOfWork;
-    using System.Collections.Generic;
-    using System.Linq;
-    using ViewModels.Game;
 
     public class Game : Hub
     {
         private IStarWars3DB data;
 
+        private static int playerId;
+
+        private static CellDTO selectedCell;
+
         public Game(IStarWars3DB data)
         {
             this.data = data;
+
+            if (selectedCell == null)
+            {
+                selectedCell = new CellDTO();
+            }
         }
 
-        public void ShowGame()
+
+        public void ShowGame(int id)
         {
-            //int playerId = int.Parse(id);
-            //MapDTO mapDTO = PlayerService.GetMap(data, playerId);
-            //PlayerResourcesDTO playerResourcesDto = PlayerService.GetPlayerResources(data, playerId);
-            //LoadGameViewModel showGameVieModel = new LoadGameViewModel()
-            //{
-            //    mapDto = mapDTO,
-            //    playerResourcesDto = playerResourcesDto
-            //};
-            Clients.Caller.drawBoard(0, 16, 20);
+            playerId = id;
+            Clients.All.clearBoard();
+            Clients.All.drawBoard(16, 20);
             GetPlanets();
-            //GetBuildings();
-            //GetUnits();
+            GetBuildings();
+            GetUnits();
         }
 
 
+        //////////// GET OBJECTS FROM DATABASE AND DRAW THEM ///////////////////
         public void GetPlanets()
         {
             var planets = PlayerService.GetPlanets(data);
@@ -43,7 +46,7 @@
             {
                 foreach (var cell in planet.Cells)
                 {
-                    Clients.Caller.drawGameObject(cell.row, cell.col);
+                    Clients.All.drawPlanet(cell.row, cell.col);
                 }
             }
         }
@@ -54,7 +57,7 @@
 
             foreach (var building in buildings)
             {
-                Clients.Caller.drawGameObject(building.Cell.row, building.Cell.col);
+                Clients.All.drawGasFactory(building.Cell.row, building.Cell.col);
             }
         }
 
@@ -64,24 +67,67 @@
 
             foreach (var unit in units)
             {
-                Clients.Caller.drawGameObject(unit.Cell.row, unit.Cell.col);
+                Clients.All.drawFighter(unit.Cell.row, unit.Cell.col);
             }
         }
 
+        
+        /////////////// RECEIVE MOUSE CLICK CELL LOCATION AND SHOW MENU BUTTONS///////////////////////
         public void OnMouseDown(int row, int col)
         {
-            if (PlayerService.LocationHasUnit(data,row,col))
+            selectedCell.row = row;
+            selectedCell.col = col;
+
+            if (PlayerService.LocationHasUnit(data, row, col))
             {
-                Clients.Caller.showBuildingsMenu();
+                Clients.Caller.showUnitsStats();
             }
-            if (PlayerService.LocationHasBuilding(data, row, col))
+            else if (PlayerService.LocationHasBuilding(data, row, col))
             {
-                Clients.Caller.showBuildingsMenu();
+                Clients.Caller.showUnitsMenu();
             }
-            if (PlayerService.LocationHasPlanet(data, row, col))
+            else if (PlayerService.LocationHasPlanet(data, row, col))
             {
-                Clients.Caller.showBuildingsMenu();
+                Clients.All.showBuildingsMenu();
             }
+            else
+            {
+                Clients.All.hideMenu();
+            }
+        }
+
+
+        ////////////// CREATING  BUILDINGS ////////////////////////
+        public void BuildGasFactory()
+        {
+            int planetId = PlanetService.GetPlanetIdByLocation(data, selectedCell);
+
+            PlanetService.BuildFactory(data, planetId, Constants.GasFactoryHealth, FactoryType.GasFactory, selectedCell);
+
+            Clients.All.drawGameObjectGas(selectedCell.row, selectedCell.col);
+        }
+
+        public void BuildMetalFactory()
+        {
+            int planetId = PlanetService.GetPlanetIdByLocation(data, selectedCell);
+
+            PlanetService.BuildFactory(data, planetId, Constants.MetalFactoryHealth, FactoryType.MetalFactory, selectedCell);
+        }
+
+        public void BuildMineralsFactory()
+        {
+            int planetId = PlanetService.GetPlanetIdByLocation(data, selectedCell);
+
+            PlanetService.BuildFactory(data, planetId, Constants.MineralsFactoryHealth, FactoryType.MineralsFactory, selectedCell);
+        }
+
+
+        // //////////// CREATING UNITS ////////////////////
+        public void BuildFighter()
+        {
+            PlanetService.BuildFighter(data,playerId, UnitType.Fighter ,selectedCell);
+
+            GetUnits();
         }
     }
 }

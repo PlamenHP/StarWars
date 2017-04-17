@@ -31,16 +31,8 @@ namespace StarWars3.Web.Controllers.Game
                 throw new ArgumentException("ShowGame: PlayerId cannot be null");
             }
 
-            MapDTO mapDTO = PlayerService.GetMap(Data, (int)playerId);
-            PlayerResourcesDTO playerResourcesDto = PlayerService.GetPlayerResources(Data, (int)playerId);
-            LoadGameViewModel loadGameVieModel = new LoadGameViewModel()
-            {
-                mapDto = mapDTO,
-                playerResourcesDto = playerResourcesDto
-            };
-            ViewBag.Id = playerId;
             PlayerId pId = new PlayerId() { Id = playerId.ToString() };
-            return View(loadGameVieModel);
+            return View(pId);
         }
     }
 }

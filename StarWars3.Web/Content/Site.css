@@ -21,6 +21,14 @@ body {
 	display: compact;
 }
 
+.units {
+  font-size:xx-small;
+}
+
+.buildings {
+  font-size:xx-small;
+}
+
 .containerStyle {
    display:block;
    width:100%;
@@ -41,12 +49,12 @@ body {
 }
 
 canvas { 
-    margin-left:auto;
-	margin-right:auto;
 	border-radius:10px;
-	width:1000px;
-	height:700px;
-	background-image: url("http://a1star.com/images/00-star-space-hubble-tile-pleiades.jpg");
+	background-image: url("http://a1star.com/images/00-star-space-hubble-tile-pleiades.jpg");*/
+}
+
+#hexmap { 
+	background-image: url("http://a1star.com/images/00-star-space-hubble-tile-pleiades.jpg");*/
 }
 
 
