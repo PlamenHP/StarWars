@@ -1,5 +1,4 @@
 ﻿window.onload = function () {
-
     var canvas = document.getElementById('hexmap');
 
     var hexHeight,
@@ -26,9 +25,9 @@
         ctx.strokeStyle = "rgba(0, 200, 0, 0.2)";
         ctx.lineWidth = 1;
 
-        drawBoard(ctx, cols, rows);
+        //drawBoard(ctx, cols, rows);
 
-        canvas.addEventListener("mousedown", function (eventInfo) {
+        canvas.addEventListener("mousedownEEEEE", function (eventInfo) {
 
             var x,
                 y,
@@ -58,7 +57,7 @@
             }
         });
 
-        canvas.addEventListener("mousemove", function (eventInfo) {
+        canvas.addEventListener("mousemoveEEEEE", function (eventInfo) {
             var x,
                 y,
                 hexX,
@@ -90,10 +89,25 @@
         });
     }
 
-    function drawBoard(canvasContext, cols, rows) {
+    function drawGameObject() {
+        alert('JS')
+        var el = new Image();
+        el.src = "http://icons.iconarchive.com/icons/custom-icon-design/office/128/add-1-icon.png";
+
+        x = (col * rectangleWidth) + ((row % 2) * hexRadius);
+        y = row * (hexHeight - (sideLength / 2));
+
+        var el = new Image();
+        el.src = "http://icons.iconarchive.com/icons/custom-icon-design/office/128/add-1-icon.png";
+        y += height / 4;
+        canvasContext.drawImage(el, x, y, rectangleWidth, sideLength);
+    }
+
+
+    game.client.drawBoard = function(canvasContext, cols, rows) {
         var i,
             j;
-
+        alert('draw')
         for (i = 0; i < cols; ++i) {
             for (j = 0; j < rows; ++j) {
                 drawHexagon(

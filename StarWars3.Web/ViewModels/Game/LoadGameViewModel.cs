@@ -2,7 +2,7 @@
 
 namespace StarWars3.Web.ViewModels.Game
 {
-    public class ShowGameViewModel
+    public class LoadGameViewModel
     {
         public PlayerResourcesDTO playerResourcesDto { get; set; }
 
