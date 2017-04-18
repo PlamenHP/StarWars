@@ -38,10 +38,18 @@
 
 <script type="text/javascript">
 
-	$(function () {
+    $(function () {
+        //////////////////////
+        ///// TEST
+        //////////////////////////
+        let u = $("#unitsStats");
+        u.hide();
+
+
 		$("#buildings").hide();
 		$("#units").hide();
-		$("#unitsStats").hide();
+		//$("#unitsStats").hide();
+
 		//////////////////////
 		/////////////GAME OBJECTS
 		//////////////////////////
@@ -58,29 +66,45 @@
 		///////////////////////////////////////////////////////////////////
 		//// ON BOARD CLICK SHOW MENUS
 		//////////////////////////////////////////////////////////////////////////
-		game.client.showUnitsStats = function () {
+		game.client.showUnitsStats = function (unitLevel) {
+
+		    let stats =
+                "health " + unitLevel.Health +
+		        " attack " + unitLevel.Atack +
+                " armor " + unitLevel.Armor;
+
+		    //confirm(stats);
+
 			$("#units").hide();
 			$("#buildings").hide();
-			$("#unitsStats").show();
-			$('#unitStats').append($("<div>").text("shield 20, attack 30, health 50"));
+		    //$('#unitStats').show();
+		    //$('#unitStats').append($('<div>').text(stats));
+
+			u.show().append($('<div>').text(stats));
 		}
 
 		game.client.showUnitsMenu = function () {
 			$("#units").show();
 			$("#buildings").hide();
-			$("#unitsStats").hide();
+		    //$("#unitsStats").hide();
+
+			u.hide();
 		}
 
 		game.client.showBuildingsMenu = function () {
 			$("#units").hide();
 			$("#buildings").show();
-			$("#unitsStats").hide();
+		    //$("#unitsStats").hide();
+
+			u.hide();
 		}
 
 		game.client.hideMenu = function () {
 			$("#units").hide();
 			$("#buildings").hide();
-			$("#unitsStats").hide();
+		    //$("#unitsStats").hide();
+
+			u.hide();
 		}
 
 

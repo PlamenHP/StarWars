@@ -12,9 +12,9 @@ namespace StarWars3.Data
         public StarWars3Context()
             : base("StarWars3Context", throwIfV1Schema: false)
         {
-            //Database.SetInitializer(
-            //    new DropCreateDatabaseAlways<StarWars3Context>()
-            //    );
+            Database.SetInitializer(
+                new StarWarsCustomInitializer()
+                );
         }
 
         public static StarWars3Context Create()

@@ -2,6 +2,7 @@
 namespace StarWars3.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
 
     public class Cell
     {

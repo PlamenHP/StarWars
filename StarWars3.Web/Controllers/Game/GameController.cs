@@ -26,10 +26,10 @@ namespace StarWars3.Web.Controllers.Game
         // GET: Planet
         public ActionResult LoadGame(int? playerId)
         {
-            if (playerId == null)
-            {
-                throw new ArgumentException("ShowGame: PlayerId cannot be null");
-            }
+            //if (playerId == null)
+            //{
+            //    throw new ArgumentException("ShowGame: PlayerId cannot be null");
+            //}
 
             PlayerId pId = new PlayerId() { Id = playerId.ToString() };
             return View(pId);

@@ -60,11 +60,16 @@ namespace StarWars3.Services.Game
             return planets;
         }
 
-        public static bool LocationHasUnit(IStarWars3DB context, int row, int col)
+        public static Unit LocationHasUnit(IStarWars3DB context, int row, int col)
         {
-            bool hasPlanet = context.Units.Any(l =>  l.Location.row == row && l.Location.col == col);
+            //bool hasPlanet = context.Units.Any(l => l.Location.row == row && l.Location.col == col);
+            //return hasPlanet;
 
-            return hasPlanet;
+            return context.Units.All()
+                .Where(u =>
+                    u.Location.row == row &&
+                    u.Location.col == col)
+                .FirstOrDefault();
         }
 
         public static bool LocationHasBuilding(IStarWars3DB context, int row, int col)
@@ -96,6 +101,7 @@ namespace StarWars3.Services.Game
 
             return units;
         }
+
     }
 }
 
