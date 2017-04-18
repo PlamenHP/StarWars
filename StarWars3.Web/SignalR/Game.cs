@@ -75,8 +75,12 @@
         /////////////// RECEIVE MOUSE CLICK CELL LOCATION AND SHOW MENU BUTTONS///////////////////////
         public void OnMouseDown(int row, int col)
         {
+            ShowGame(playerId);
+
             selectedCell.row = row;
             selectedCell.col = col;
+
+            Clients.Caller.markHexagonAsSelected(row, col);
 
             Unit unit = PlayerService.LocationHasUnit(data, row, col);
 

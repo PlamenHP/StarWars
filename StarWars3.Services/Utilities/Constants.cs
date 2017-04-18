@@ -2,6 +2,10 @@
 {
     public static class Constants
     {
+        // Images size
+        public const int DefaultImageWidth = 150;
+        public const int DefaultImageHeight = 150;
+
         //player resources
         public const int InitialPlayerGas = 100;
         public const int InitialPlayerMetal = 100;

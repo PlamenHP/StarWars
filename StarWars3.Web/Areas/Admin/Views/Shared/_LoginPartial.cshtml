@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNet.Identity
+
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+	using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+	{
+		@Html.AntiForgeryToken()
+
+		<ul class="nav navbar-nav navbar-right">
+			<li>
+				@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", new { area = "" }, htmlAttributes: new { title = "Manage" })
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Account<span class="caret"></span></a>
+				<ul class="dropdown-menu" role="menu">
+					<li>@Html.ActionLink("Admin Panel", "Index", "Home", new { area = "Admin" }, null)</li>
+					<li>@Html.ActionLink("Unit", "Index", "Units", new { area = "Admin" }, null)</li>
+					<li>@Html.ActionLink("Images", "Index", "Images", new { area = "Admin" }, null)</li>
+					<li>@Html.ActionLink("Products In Stock", "Index", "Products", new { area = "Admin" }, null)</li>
+					<li>@Html.ActionLink("Deleted Products", "ListDeleted", "Products", new { area = "Admin" }, null)</li>
+					<li>@Html.ActionLink("Manage Account", "Index", "Manage", new { area = "" }, htmlAttributes: new { title = "Manage" })</li>
+					<li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+				</ul>
+			</li>
+		</ul>
+	}
+}

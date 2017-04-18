@@ -1,14 +1,13 @@
 ﻿namespace StartWars3.Data
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using StarWars3.Data;
     using StarWars3.Models;
     using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.IO;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Web;
 
     public class StarWarsCustomInitializer
@@ -17,12 +16,14 @@
         protected override void Seed(StarWars3Context context)
         {
             string pathFighters = HttpContext.Current.Server.MapPath("~/App_Data/fighters.csv");
+
+            SeedAccountsAndRoles(context);
             SeedFighterLevels(context, pathFighters);
 
             base.Seed(context);
         }
 
-        public static void SeedFighterLevels(IStarWars3Context context, string path)
+        public void SeedFighterLevels(IStarWars3Context context, string path)
         {
             string[] fighters = File.ReadAllLines(path);
 
@@ -53,6 +54,89 @@
                 context.UnitLevels.Add(fighter);
             }
             context.SaveChanges();
+        }
+
+        public void SeedAccountsAndRoles(StarWars3Context context)
+        {
+            if (!context.Roles.Any())
+            {
+                this.CreateRole(context, "Admin");
+                this.CreateRole(context, "User");
+            }
+
+            if (!context.Roles.Any(r => r.Name == "Admin"))
+            {
+                this.CreateRole(context, "Admin");
+            }
+
+            if (!context.Roles.Any(r => r.Name == "User"))
+            {
+                this.CreateRole(context, "User");
+            }
+
+            if (!context.Users.Any())
+            {
+                this.CreateUser(context, "admin@admin.com", "123");
+                this.SetRoleToUser(context, "admin@admin.com", "Admin");
+            }
+        }
+
+        private void CreateRole(StarWars3Context context, string roleName)
+        {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+            var result = roleManager.Create(new IdentityRole(roleName));
+
+            if (!result.Succeeded)
+            {
+                throw new Exception(string.Join(";", result.Errors));
+            }
+        }
+
+        private void CreateUser(StarWars3Context context, string email, string password)
+        {
+            // Create user manager
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            // Set user manager password validator
+            userManager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 1,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireNonLetterOrDigit = false,
+                RequireUppercase = false,
+            };
+
+            // Create user object
+            var admin = new ApplicationUser()
+            {
+                UserName = email,
+                Email = email,            
+            };
+
+            // Create user
+            var result = userManager.Create(admin, password);
+
+            // Validate result
+            if (!result.Succeeded)
+            {
+                throw new Exception(string.Join(";", result.Errors));
+            }
+        }
+
+        private void SetRoleToUser(StarWars3Context context, string email, string role)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            var user = context.Users.Where(u => u.Email == email).First();
+
+            var result = userManager.AddToRole(user.Id, role);
+
+            if (!result.Succeeded)
+            {
+                throw new Exception(string.Join(";", result.Errors));
+            }
         }
     }
 }

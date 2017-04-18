@@ -12,6 +12,12 @@ namespace StarWars3.Web.Controllers
 
         public ActionResult Index()
         {
+            bool isAdmin = this.User.IsInRole("Admin");
+            if (isAdmin)
+            {
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
+            }
+
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index","Game");

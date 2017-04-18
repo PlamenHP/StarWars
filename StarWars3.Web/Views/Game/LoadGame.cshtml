@@ -268,8 +268,20 @@
 			drawObject(row, col, ctxImage)
 		}
 
-		game.client.clearBoard = function ()
-		{
+		game.client.markHexagonAsSelected = function (row, col) {
+
+			screenX = (col * rectangleWidth) + ((row % 2) * hexRadius);
+			screenY = row * (hexHeight - (sideLength / 2));
+
+			//draw red hexagon
+			ctx.strokeStyle = "rgba(200, 0, 0, 1)";
+			drawHexagon(ctx, screenX, screenY, false);
+
+			//return color to green
+			ctx.strokeStyle = "rgba(0, 200, 0, 0.2)";
+		}
+
+		game.client.clearBoard = function () {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 		}
 

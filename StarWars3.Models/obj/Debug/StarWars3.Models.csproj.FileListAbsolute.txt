@@ -11,7 +11,6 @@ C:\Users\user\Documents\GitHub\StarWars\StarWars3.Models\bin\Debug\Microsoft.Asp
 C:\Users\user\Documents\GitHub\StarWars\StarWars3.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\user\Documents\GitHub\StarWars\StarWars3.Models\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 C:\Users\user\Documents\GitHub\StarWars\StarWars3.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
-C:\Users\user\Documents\GitHub\StarWars\StarWars3.Models\obj\Debug\StarWars3.Models.csprojResolveAssemblyReference.cache
 D:\Documents\StarWars\StarWars3.Models\bin\Debug\StarWars3.Models.dll.config
 D:\Documents\StarWars\StarWars3.Models\bin\Debug\StarWars3.Models.dll
 D:\Documents\StarWars\StarWars3.Models\bin\Debug\StarWars3.Models.pdb
@@ -25,3 +24,4 @@ D:\Documents\StarWars\StarWars3.Models\bin\Debug\Microsoft.AspNet.Identity.Core.
 D:\Documents\StarWars\StarWars3.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 D:\Documents\StarWars\StarWars3.Models\obj\Debug\StarWars3.Models.dll
 D:\Documents\StarWars\StarWars3.Models\obj\Debug\StarWars3.Models.pdb
+C:\Users\user\Documents\GitHub\StarWars\StarWars3.Models\obj\Debug\StarWars3.Models.csprojResolveAssemblyReference.cache
