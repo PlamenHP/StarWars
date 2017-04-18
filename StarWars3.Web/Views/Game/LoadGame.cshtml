@@ -38,48 +38,73 @@
 
 <script type="text/javascript">
 
-	$(function () {
-		/////////////////////////////
-		/////////////HIDE ALL MENUS
-		///////////////////////////
+    $(function () {
+        //////////////////////
+        ///// TEST
+        //////////////////////////
+        let u = $("#unitsStats");
+        u.hide();
+
+
 		$("#buildings").hide();
 		$("#units").hide();
-		$("#unitsStats").hide();
+		//$("#unitsStats").hide();
+
+		//////////////////////
+		/////////////GAME OBJECTS
+		//////////////////////////
 
 
-		//////////////////////////////////////////
-		/////////// SIGNALR CONNECTION START
-		//////////////////////////////////////////
+		///////////////////////////
+		/////////// SIGNALR JS
+		//////////////////////////
 		$.connection.hub.start();
+
 		var game = $.connection.game;
 
 
 		///////////////////////////////////////////////////////////////////
 		//// ON BOARD CLICK SHOW MENUS
 		//////////////////////////////////////////////////////////////////////////
-		game.client.showUnitsStats = function () {
+		game.client.showUnitsStats = function (unitLevel) {
+
+		    let stats =
+                "health " + unitLevel.Health +
+		        " attack " + unitLevel.Atack +
+                " armor " + unitLevel.Armor;
+
+		    //confirm(stats);
+
 			$("#units").hide();
 			$("#buildings").hide();
-			$("#unitsStats").show();
-			$('#unitStats').append($("<div>").text("shield 20, attack 30, health 50"));
+		    //$('#unitStats').show();
+		    //$('#unitStats').append($('<div>').text(stats));
+
+			u.show().append($('<div>').text(stats));
 		}
 
 		game.client.showUnitsMenu = function () {
 			$("#units").show();
 			$("#buildings").hide();
-			$("#unitsStats").hide();
+		    //$("#unitsStats").hide();
+
+			u.hide();
 		}
 
 		game.client.showBuildingsMenu = function () {
 			$("#units").hide();
 			$("#buildings").show();
-			$("#unitsStats").hide();
+		    //$("#unitsStats").hide();
+
+			u.hide();
 		}
 
 		game.client.hideMenu = function () {
 			$("#units").hide();
 			$("#buildings").hide();
-			$("#unitsStats").hide();
+		    //$("#unitsStats").hide();
+
+			u.hide();
 		}
 
 
@@ -203,11 +228,11 @@
 			var x = (col * rectangleWidth) + ((row % 2) * hexRadius);
 			var y = (row * (hexHeight - (sideLength / 2))) + (sideLength / 4);
 
-			//ctx.fillStyle = "rgba(200, 0, 0, 0.4)";
-			//ctx.strokeStyle = "rgba(0, 200, 0, 0.2)";
-			//ctx.lineWidth = 1;
+			ctx.fillStyle = "rgba(200, 0, 0, 0.4)";
+			ctx.strokeStyle = "rgba(0, 200, 0, 0.2)";
+			ctx.lineWidth = 1;
 
-			ctx.drawImage(ctxImage, x, y, rectangleWidth, rectangleWidth);
+			ctx.drawImage(ctxImage, x, y, rectangleWidth, sideLength);
 		}
 
 		///////// SIGNALR OBJECTS DRAWING FUNCTIONS //////
@@ -241,17 +266,6 @@
 			var ctxImage = new Image();
 			ctxImage.src = "http://bricksafe.com/files/JBB_777/republic_strike_fighter/folding05.gif";
 			drawObject(row, col, ctxImage)
-		}
-
-		game.client.drawRedHexagon = function (row, col) {
-			ctx.fillStyle = "rgba(200, 0, 0, 0.4)";
-			ctx.strokeStyle = "rgba(200, 0, 0, 0.5)";
-			ctx.lineWidth = 1;
-			drawHexagon(ctx,
-				        row * rectangleWidth + ((j % 2) * hexRadius),
-						col * (hexHeight - (sideLength / 2)),
-						false
-					);
 		}
 
 		game.client.clearBoard = function ()

@@ -9,6 +9,7 @@ namespace StarWars3.Models
 
         [StringLength(50)]
         public string Name { get; set; }
+        public UnitType Type { get; set; }
         public int Level { get; set; }
 
         public int? Atack { get; set; }

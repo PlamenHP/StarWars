@@ -78,11 +78,11 @@
             selectedCell.row = row;
             selectedCell.col = col;
 
-            Clients.All.drawRedHexagon(row, col);
+            Unit unit = PlayerService.LocationHasUnit(data, row, col);
 
-            if (PlayerService.LocationHasUnit(data, row, col))
+            if (unit != null)
             {
-                Clients.Caller.showUnitsStats();
+                Clients.Caller.showUnitsStats(unit.UnitLevel);
             }
             else if (PlayerService.LocationHasBuilding(data, row, col))
             {
