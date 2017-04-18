@@ -39,19 +39,18 @@
 <script type="text/javascript">
 
 	$(function () {
+		/////////////////////////////
+		/////////////HIDE ALL MENUS
+		///////////////////////////
 		$("#buildings").hide();
 		$("#units").hide();
 		$("#unitsStats").hide();
-		//////////////////////
-		/////////////GAME OBJECTS
-		//////////////////////////
 
 
-		///////////////////////////
-		/////////// SIGNALR JS
-		//////////////////////////
+		//////////////////////////////////////////
+		/////////// SIGNALR CONNECTION START
+		//////////////////////////////////////////
 		$.connection.hub.start();
-
 		var game = $.connection.game;
 
 
@@ -204,11 +203,11 @@
 			var x = (col * rectangleWidth) + ((row % 2) * hexRadius);
 			var y = (row * (hexHeight - (sideLength / 2))) + (sideLength / 4);
 
-			ctx.fillStyle = "rgba(200, 0, 0, 0.4)";
-			ctx.strokeStyle = "rgba(0, 200, 0, 0.2)";
-			ctx.lineWidth = 1;
+			//ctx.fillStyle = "rgba(200, 0, 0, 0.4)";
+			//ctx.strokeStyle = "rgba(0, 200, 0, 0.2)";
+			//ctx.lineWidth = 1;
 
-			ctx.drawImage(ctxImage, x, y, rectangleWidth, sideLength);
+			ctx.drawImage(ctxImage, x, y, rectangleWidth, rectangleWidth);
 		}
 
 		///////// SIGNALR OBJECTS DRAWING FUNCTIONS //////
@@ -242,6 +241,17 @@
 			var ctxImage = new Image();
 			ctxImage.src = "http://bricksafe.com/files/JBB_777/republic_strike_fighter/folding05.gif";
 			drawObject(row, col, ctxImage)
+		}
+
+		game.client.drawRedHexagon = function (row, col) {
+			ctx.fillStyle = "rgba(200, 0, 0, 0.4)";
+			ctx.strokeStyle = "rgba(200, 0, 0, 0.5)";
+			ctx.lineWidth = 1;
+			drawHexagon(ctx,
+				        row * rectangleWidth + ((j % 2) * hexRadius),
+						col * (hexHeight - (sideLength / 2)),
+						false
+					);
 		}
 
 		game.client.clearBoard = function ()
