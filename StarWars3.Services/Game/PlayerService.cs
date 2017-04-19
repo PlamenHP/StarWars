@@ -62,9 +62,6 @@ namespace StarWars3.Services.Game
 
         public static Unit LocationHasUnit(IStarWars3DB context, int row, int col)
         {
-            //bool hasPlanet = context.Units.Any(l => l.Location.row == row && l.Location.col == col);
-            //return hasPlanet;
-
             return context.Units.All()
                 .Where(u =>
                     u.Location.row == row &&
@@ -72,24 +69,37 @@ namespace StarWars3.Services.Game
                 .FirstOrDefault();
         }
 
-        public static bool LocationHasBuilding(IStarWars3DB context, int row, int col)
+        public static Factory LocationHasBuilding(IStarWars3DB context, int row, int col)
         {
-            bool hasPlanet = context.Factories.Any(l => l.Location.row == row && l.Location.col == col);
-
-            return hasPlanet;
+            return context.Factories
+                .All()
+                .Where(l => 
+                    l.Location.row == row && 
+                    l.Location.col == col)
+                .FirstOrDefault();
         }
 
-        public static bool LocationHasPlanet(IStarWars3DB context,int row, int col)
+        public static Planet LocationHasPlanet(IStarWars3DB context,int row, int col)
         {
-            bool hasPlanet = context.Planets.Any(p=>p.Locations.Any(l=>l.row==row&&l.col==col));
-
-            return hasPlanet;
+            return context.Planets.All()
+                .Where(p => p.Locations.Any(l =>
+                    l.row == row &&
+                    l.col == col))
+                .FirstOrDefault();
         }
 
         public static ICollection<BuildingDTO> GetBuildings(IStarWars3DB context)
         {
             var buildings = context.Factories.All().Select(p => new BuildingDTO
-            { Id = p.Id, Image = p.Image, Cell = new CellDTO { row = p.Location.row, col = p.Location.col } }).ToList();
+            {
+                Id = p.Id,
+                Image = p.Image,
+                Cell = new CellDTO
+                {
+                    row = p.Location.row,
+                    col = p.Location.col
+                }
+            }).ToList();
 
             return buildings;
         }
@@ -102,6 +112,18 @@ namespace StarWars3.Services.Game
             return units;
         }
 
+        public static void ChangeUnitLocation(IStarWars3DB context, CellDTO selectedCell, CellDTO previousCell)
+        {
+            Unit unit = LocationHasUnit(context, previousCell.row, previousCell.col);
+            Cell newLocation = new Cell
+            {
+                row = selectedCell.row,
+                col = selectedCell.col
+            };
+            context.Cells.Add(newLocation);
+            unit.Location = newLocation;
+            context.SaveChanges();
+        }
     }
 }
 

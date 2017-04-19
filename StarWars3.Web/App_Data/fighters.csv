@@ -1,4 +1,7 @@
 Name,UnitType,Level,Atack,Shield,Armor,Health,Speed,FuelConsumption
-FighterLevel_0,0,0,20,20,20,100,3,10
-FighterLevel_1,0,1,25,30,30,120,3,10
-FighterLevel_2,0,2,30,40,40,140,4,12
+FighterLevel_0,0,0,20,20,20,100,4,10
+FighterLevel_1,0,1,25,30,30,120,4,10
+FighterLevel_2,0,2,30,40,40,140,5,12
+DestroyerLevel_0,1,0,100,100,60,200,2,50
+DestroyerLevel_1,1,1,120,150,80,300,2,50
+DestroyerLevel_2,1,2,140,200,100,400,3,60

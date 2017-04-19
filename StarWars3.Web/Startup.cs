@@ -19,8 +19,8 @@ namespace StarWars3.Web
             ConfigureAuth(app);
             app.MapSignalR();
 
-            //var context = new StarWars3Context();
-            //context.Database.Initialize(true);
+            var context = new StarWars3Context();
+            context.Database.Initialize(true);
         }
     }
 }

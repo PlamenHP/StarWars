@@ -6,6 +6,9 @@
     using StarWars3.Models;
     using System;
     using System.Data.Entity;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Imaging;
     using System.IO;
     using System.Linq;
     using System.Web;
@@ -16,11 +19,75 @@
         protected override void Seed(StarWars3Context context)
         {
             string pathFighters = HttpContext.Current.Server.MapPath("~/App_Data/fighters.csv");
-
-            SeedAccountsAndRoles(context);
             SeedFighterLevels(context, pathFighters);
 
+            SeedAccountsAndRoles(context);
+
+            string pathMetalFactory = "~/App_Data/robo_sc2.png";
+            string pathGasFactory = "~/App_Data/commandement_sc2.png";
+            string pathMineralsFactory = "~/App_Data/gateway_sc2.png";
+            string pathFighter = "~/App_Data/phoenix_sc2.png";
+            string pathDestroyer = "~/App_Data/carrier_sc2.png";
+            string pathPlanet = "~/App_Data/greenplanet.png";
+
+            ToByteArrayImage(context, pathMetalFactory, "MetalFactory", 50, 50);
+            ToByteArrayImage(context, pathGasFactory, "GasFactory", 50, 50);
+            ToByteArrayImage(context, pathMineralsFactory, "MineralsFactory", 50, 50);
+            ToByteArrayImage(context, pathFighter, "Fighter", 50, 50);
+            ToByteArrayImage(context, pathDestroyer, "Destroyer", 50, 50);
+            ToByteArrayImage(context, pathPlanet, "Planet", 50, 50);
+
             base.Seed(context);
+        }
+
+        public void ToByteArrayImage(
+            StarWars3Context context,
+            string str,
+            string name,
+            int width,
+            int height)
+        {
+            string path = HttpContext.Current.Server.MapPath(str);
+
+            var stream = new FileStream(
+                path,
+                FileMode.Open,
+                FileAccess.Read
+            );
+
+            var image = System.Drawing.Image.FromStream(stream, true, true);
+
+            context.Images.Add(new StarWars3.Models.Image
+            {
+                Name = name,
+                Container = ResizeImage(image, width, height)
+            });
+        }
+
+        public byte[] ResizeImage(System.Drawing.Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            ImageConverter converter = new ImageConverter();
+            return (byte[])converter.ConvertTo(destImage, typeof(byte[]));
         }
 
         public void SeedFighterLevels(IStarWars3Context context, string path)

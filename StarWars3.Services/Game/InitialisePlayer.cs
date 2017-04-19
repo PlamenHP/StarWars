@@ -17,9 +17,11 @@ namespace StarWars3.Services.Game
 
             if (!(context.Players.Any(p => p.AspNetId == aspNetId)))
             {
+                Image img = PlanetService.GetImage(context, "Planet");
                 Planet planet = new Planet()
                 {
                     Name = "Earth",
+                    ImageId = img.Id
                 };
 
                 if (PlayerService.IfNoOtherPlayers(context))
