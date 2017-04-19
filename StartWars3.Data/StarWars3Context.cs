@@ -26,12 +26,13 @@ namespace StarWars3.Data
         {
             return base.Set<T>();
         }
+        public virtual IDbSet<PlanetTemplate> PlanetTemplates { get; set; }
+        public virtual IDbSet<FactoryTemplate> FactoryTemplates { get; set; }
+        public virtual IDbSet<UnitTemplate> UnitTemplates { get; set; }
         public virtual IDbSet<Cell> Cells { get; set; }
         public virtual IDbSet<Map> Maps { get; set; }
-        public virtual IDbSet<CreateUnit> CreateUnits { get; set; }
         public virtual IDbSet<LevelUpgradePrice> EngineeringLevelsPrices { get; set; }
         public virtual IDbSet<Factory> Factories { get; set; }
-        public virtual IDbSet<Image> Images { get; set; }
         public virtual IDbSet<Planet> Planets { get; set; }
         public virtual IDbSet<Player> Players { get; set; }
         public virtual IDbSet<Price> Prices { get; set; }

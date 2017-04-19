@@ -1,0 +1,144 @@
+﻿@model StarWars3.Web.Areas.Admin.ViewModels.UnitTemplateViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>UnitTemplate</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitType)
+        </dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.ImageToView)
+		</dt>
+
+		<dd>
+			<img src="@Model.ImageToView">
+		</dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequiredLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequiredLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Damage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Damage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Range)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Range)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Shield)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Shield)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Armor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Armor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Speed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Speed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FuelConsumption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FuelConsumption)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Health)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Health)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetalCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetalCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GasCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GasCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MineralsCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MineralsCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeCost)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<StarWars3.Web.Areas.Admin.ViewModels.UnitTemplateViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitType)
+        </th>
+        <th>
+			@Html.DisplayNameFor(model => model.ImageToView)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequiredLevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Damage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Range)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Shield)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Armor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Speed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FuelConsumption)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Health)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MetalCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GasCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MineralsCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeCost)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitType)
+        </td>
+        <td>
+			<img src="@item.ImageToView">
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequiredLevel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Damage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Range)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Shield)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Armor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Speed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FuelConsumption)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Health)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetalCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GasCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MineralsCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeCost)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

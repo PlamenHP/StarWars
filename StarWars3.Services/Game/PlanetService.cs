@@ -13,19 +13,28 @@ namespace StarWars3.Services.Game
         {
             int id = context.Planets.FirstOrDefault(p =>
 
-            p.Locations.Any(l => (l.row == cell.row) && (l.col == cell.col))).Id;
+            p.PlanetTemplate.Locations.Any(l => (l.row == cell.row) && (l.col == cell.col))).Id;
 
             return id;
         }
 
-        public static void BuildFactory(IStarWars3DB context, int planetId, int factoryHealth, FactoryType factoryType, CellDTO location)
+        public static void BuildFactory(IStarWars3DB context, FactoryType factoryType,int playerId ,CellDTO location)
         {
+            FactoryTemplate factoryTemplate = context.FactoryTemplates.FirstOrDefault(t => t.FactoryType == factoryType);
+
+            if (factoryTemplate == null)
+            {
+                throw new NullReferenceException("BuildFactory: Factory type not found!");
+            }
+
             Factory factory = new Factory()
             {
-                FactoryType = factoryType,
-                Health = factoryHealth,
-                Location = new Cell { row = location.row, col = location.col },
-                PlanetId = planetId           
+                FactoryTemplateId = factoryTemplate.Id,
+                Level = factoryTemplate.Level,
+                PlayerId = playerId,
+                Health = factoryTemplate.Health,
+                Shield = factoryTemplate.Shield,
+                Location = new Cell { row = location.row, col = location.col },    
             };
 
             context.Factories.Add(factory);
@@ -66,17 +75,28 @@ namespace StarWars3.Services.Game
                 }
             }
 
-            UnitLevel uLevel = GetUnitLevel(context, unitType, 0);
+            UnitTemplate unitTemplate = context.UnitTemplates.FirstOrDefault(t=>t.UnitType == unitType);
+            if (unitTemplate == null)
+            {
+                throw new NullReferenceException("BuildFighter: unitTemplate not found!");
+            }
+
+            UnitLevel uLevel = GetUnitLevel(context, unitTemplate.UnitType, 0);
 
             if (emptyCell)
             {
                 Unit fighter = new Unit()
                 {
-                    Name = "Fighter",
+                    UnitTemplateId = unitTemplate.Id,
                     PlayerId = playerId,
                     Location = cell,
-                    Type = unitType,
-                    UnitLevelId = uLevel.Id
+                    Armor = unitTemplate.Armor,
+                    Damage = unitTemplate.Damage,
+                    Shield = unitTemplate.Shield,
+                    Range = unitTemplate.Range,
+                    Speed = unitTemplate.Speed,
+                    Health = unitTemplate.Health,
+                    FuelConsumption = unitTemplate.FuelConsumption
                 };
 
                 context.Units.Add(fighter);

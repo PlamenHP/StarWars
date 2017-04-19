@@ -2,10 +2,17 @@
 namespace StarWars3.Models
 {
     using System.Collections.Generic;
-    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public class Cell
     {
+        public Cell()
+        {
+            Units = new HashSet<Unit>();
+            Factories = new HashSet<Factory>();
+        }
+
+        [Key]
         public int Id { get; set; }
         public int row { get; set; }
         public int col { get; set; }

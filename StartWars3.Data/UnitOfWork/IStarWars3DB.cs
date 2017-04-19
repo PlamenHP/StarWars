@@ -8,13 +8,15 @@ namespace StartWars3.Data.UnitOfWork
     {
         IRepository<ApplicationUser> ApplicationUsers { get; }
 
-        IRepository<CreateUnit> CreateUnits { get; }
+        IRepository<PlanetTemplate> PlanetTemplates { get; }
+
+        IRepository<FactoryTemplate> FactoryTemplates { get; }
+
+        IRepository<UnitTemplate> UnitTemplates { get; }
 
         IRepository<LevelUpgradePrice> EngineeringLevelsPrices { get; }
 
         IRepository<Factory> Factories { get; }
-
-        IRepository<Image> Images { get; }
 
         IRepository<Planet> Planets { get; }
 
@@ -24,7 +26,7 @@ namespace StartWars3.Data.UnitOfWork
 
         IRepository<ResurceBuildingsLevel> ResurceBuildingsLevels { get; }
 
-        IRepository<UnitLevel> UnitLevels { get;}
+        IRepository<UnitLevel> UnitLevels { get; }
 
         IRepository<Unit> Units { get; }
 

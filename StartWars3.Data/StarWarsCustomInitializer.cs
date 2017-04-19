@@ -5,6 +5,7 @@
     using StarWars3.Data;
     using StarWars3.Models;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.IO;
     using System.Linq;
@@ -18,9 +19,32 @@
             string pathFighters = HttpContext.Current.Server.MapPath("~/App_Data/fighters.csv");
 
             SeedAccountsAndRoles(context);
+            SeedPlanets(context);
             SeedFighterLevels(context, pathFighters);
 
             base.Seed(context);
+        }
+
+        public void SeedPlanets(IStarWars3Context context)
+        {
+            PlanetTemplate planetTemplate = new PlanetTemplate()
+            {
+                IsTaken = false,
+                Name = "Tatuin-1",
+
+                Locations = new List<Cell>()
+                {
+                    new Cell(){row =2,col =2},
+                    new Cell(){row =2, col=3},
+                    new Cell(){row =3,col =1},
+                    new Cell(){row =3, col=2},
+                    new Cell(){row =3,col =3},
+                    new Cell(){row =4, col=2},
+                    new Cell(){row =4, col=3},
+                },              
+            };
+
+            context.PlanetTemplates.Add(planetTemplate);
         }
 
         public void SeedFighterLevels(IStarWars3Context context, string path)
@@ -39,7 +63,7 @@
                     Name = data[0],
                     Type = (UnitType)int.Parse(data[1]),
                     Level = int.Parse(data[2]),
-                    Atack = int.Parse(data[3]),
+                    Damage = int.Parse(data[3]),
                     Shield = int.Parse(data[4]),
                     Armor = int.Parse(data[5]),
                     Health = int.Parse(data[6]),

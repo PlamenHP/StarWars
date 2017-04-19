@@ -9,10 +9,11 @@ namespace StartWars3.Data.UnitOfWork
     {
         private readonly IStarWars3Context starWars3Context;
         private IRepository<ApplicationUser> applicationUsers;
-        private IRepository<CreateUnit> createUnits;
+        private IRepository<PlanetTemplate> planetTemplates;
+        private IRepository<FactoryTemplate> factoryTemplates;
+        private IRepository<UnitTemplate> unitTemplates;
         private IRepository<LevelUpgradePrice> engineeringLevelsPrices;
         private IRepository<Factory> factories;
-        private IRepository<Image> images;
         private IRepository<Planet> planets;
         private IRepository<Player> players;
         private IRepository<Price> prices;
@@ -36,10 +37,11 @@ namespace StartWars3.Data.UnitOfWork
         public IRepository<Cell> Cells => (cells ?? (this.cells = new GenericRepository<Cell>(starWars3Context)));
         public IRepository<Map> Maps => (maps ?? (this.maps = new GenericRepository<Map>(starWars3Context)));
         public IRepository<ApplicationUser> ApplicationUsers => (applicationUsers ?? (this.applicationUsers = new GenericRepository<ApplicationUser>(starWars3Context)));
-        public IRepository<CreateUnit> CreateUnits => (createUnits ?? (this.createUnits = new GenericRepository<CreateUnit>(starWars3Context)));
+        public IRepository<PlanetTemplate> PlanetTemplates => (planetTemplates ?? (this.planetTemplates = new GenericRepository<PlanetTemplate>(starWars3Context)));
+        public IRepository<FactoryTemplate> FactoryTemplates => (factoryTemplates ?? (this.factoryTemplates = new GenericRepository<FactoryTemplate>(starWars3Context)));
+        public IRepository<UnitTemplate> UnitTemplates => (unitTemplates ?? (this.unitTemplates = new GenericRepository<UnitTemplate>(starWars3Context)));
         public IRepository<LevelUpgradePrice> EngineeringLevelsPrices => (engineeringLevelsPrices ?? (this.engineeringLevelsPrices = new GenericRepository<LevelUpgradePrice>(starWars3Context)));
         public IRepository<Factory> Factories => (factories ?? (this.factories = new GenericRepository<Factory>(starWars3Context)));
-        public IRepository<Image> Images => (images ?? (this.images = new GenericRepository<Image>(starWars3Context)));
         public IRepository<Planet> Planets => (planets ?? (this.planets = new GenericRepository<Planet>(starWars3Context)));
         public IRepository<Player> Players => (players ?? (this.players = new GenericRepository<Player>(starWars3Context)));
         public IRepository<Price> Prices => (prices ?? (this.prices = new GenericRepository<Price>(starWars3Context)));

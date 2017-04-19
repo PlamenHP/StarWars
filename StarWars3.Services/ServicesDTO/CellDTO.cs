@@ -1,6 +1,10 @@
-﻿namespace StarWars3.Services.ServicesDTO
+﻿
+namespace StarWars3.Services.ServicesDTO
 {
-    public class CellDTO
+    using Infrastructure.Mapping;
+    using StarWars3.Models;
+
+    public class CellDTO : IMapFrom<Cell>, IMapTo<Cell>
     {
         public int row { get; set; }
 

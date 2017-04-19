@@ -15,10 +15,10 @@ namespace StarWars3.Models
 
     public enum UpgradeType
     {
-        Atack,
+        Damage,
+        Range,
         Shiel,
         Armor,
-        Scout,
         Health
     }
 

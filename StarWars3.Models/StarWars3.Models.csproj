@@ -59,20 +59,21 @@
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Cell.cs" />
-    <Compile Include="CreateUnit.cs" />
     <Compile Include="EngineeringFactory.cs" />
     <Compile Include="Factory.cs" />
+    <Compile Include="FactoryTemplate.cs" />
     <Compile Include="FactoryType.cs" />
-    <Compile Include="Image.cs" />
     <Compile Include="LevelUpgradePrice.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Planet.cs" />
+    <Compile Include="PlanetTemplate.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Price.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResurceBuildingsLevel.cs" />
     <Compile Include="Unit.cs" />
     <Compile Include="UnitLevel.cs" />
+    <Compile Include="UnitTemplate.cs" />
     <Compile Include="UnitType.cs" />
   </ItemGroup>
   <ItemGroup>

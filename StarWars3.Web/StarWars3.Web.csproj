@@ -201,10 +201,17 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\ViewEnginesConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FactoryTemplatesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImagesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UnitsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PlanetTemplatesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UnitTemplatesController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\CellViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\FactoryTemplateViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImageViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\PlanetTemplateViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\UnitTemplateViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\Game\GameController.cs" />
@@ -253,11 +260,6 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Units\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Units\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Units\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Units\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Units\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Images\Create.cshtml" />
@@ -265,6 +267,21 @@
     <Content Include="Areas\Admin\Views\Images\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Images\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Images\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\PlanetTemplates\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\PlanetTemplates\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\PlanetTemplates\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\PlanetTemplates\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\PlanetTemplates\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\FactoryTemplates\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\FactoryTemplates\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\FactoryTemplates\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\FactoryTemplates\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\FactoryTemplates\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\UnitTemplates\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\UnitTemplates\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\UnitTemplates\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\UnitTemplates\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\UnitTemplates\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -319,6 +336,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

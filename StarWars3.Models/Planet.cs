@@ -1,32 +1,17 @@
 namespace StarWars3.Models
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     public class Planet
     {
-        public Planet()
-        {
-            Factories = new HashSet<Factory>();
-            Locations = new HashSet<Cell>();
-        }
-
+        [Key]
+        [ForeignKey("PlanetTemplate")]
         public int Id { get; set; }
-
-        [StringLength(50)]
-        public string Name { get; set; }
 
         public int PlayerId { get; set; }
         public virtual Player Player { get; set; }
 
-        public int? ImageId { get; set; }
-        public virtual Image Image { get; set; }
-
-        public virtual ICollection<Factory> Factories { get; set; }
-
-        public virtual ICollection<Cell> Locations { get; set; }
+        public virtual PlanetTemplate PlanetTemplate { get; set; }
     }
 }

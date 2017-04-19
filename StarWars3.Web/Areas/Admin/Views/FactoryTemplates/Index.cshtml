@@ -1,0 +1,87 @@
+﻿@model IEnumerable<StarWars3.Web.Areas.Admin.ViewModels.FactoryTemplateViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FactoryType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageToView)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Health)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Shield)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Level)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Income)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MetalCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GasCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MineralsCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeCost)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FactoryType)
+        </td>
+        <td>
+			<img src="@item.ImageToView">
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Health)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Shield)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Level)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Income)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetalCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GasCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MineralsCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeCost)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

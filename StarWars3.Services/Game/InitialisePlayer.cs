@@ -19,54 +19,20 @@ namespace StarWars3.Services.Game
             {
                 Planet planet = new Planet()
                 {
-                    Name = "Earth",
+                    PlanetTemplate = context.PlanetTemplates.FirstOrDefault(p => p.IsTaken == false),
                 };
 
-                if (PlayerService.IfNoOtherPlayers(context))
+                if (planet.PlanetTemplate == null)
                 {
-                    planet.Locations = new List<Cell>()
-                    {
-                        new Cell() { row = 1,col =1},
-                        new Cell() { row = 1,col =2},
-                        new Cell() { row = 2,col =1},
-                        new Cell() { row = 2,col =2},
-                        new Cell() { row = 2,col =3},
-                        new Cell() { row = 3,col =1},
-                        new Cell() { row = 3,col =2},
-                    };
-                }
-                else
-                {
-                    int r = 10;
-                    int c = 10;
-                    planet.Locations = new List<Cell>()
-                    {
-                        new Cell() { row = 1+r,col =1+c},
-                        new Cell() { row = 1+r,col =2+c},
-                        new Cell() { row = 2+r,col =1+c},
-                        new Cell() { row = 2+r,col =2+c},
-                        new Cell() { row = 2+r,col =3+c},
-                        new Cell() { row = 3+r,col =1+c},
-                        new Cell() { row = 3+r,col =2+c},
-                    };
+                    throw new ArgumentException("No available planets found");
                 }
 
-                if (context.Maps.All().FirstOrDefault()?.Id ==null)
-                {
-                    context.Maps.Add(new Map()
-                    {
-                        Rows = 16,
-                        Cols = 20,
-                        Name = "Rogue One"
-                    });
-                    context.SaveChanges();
-                }
+                planet.PlanetTemplate.IsTaken = true;
 
                 context.Players.Add(new Player()
                 {
                     AspNetId = aspNetId,
                     Planets = new[] { planet },
-                    MapId = context.Maps.All().FirstOrDefault().Id,
                     Gas = Constants.InitialPlayerGas,
                     Metal = Constants.InitialPlayerMetal,
                     Minerals = Constants.InitialPlayerMinerals

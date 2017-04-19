@@ -86,7 +86,7 @@
 
             if (unit != null)
             {
-                Clients.Caller.showUnitsStats(unit.UnitLevel);
+                Clients.Caller.showUnitsStats(unit);
             }
             else if (PlayerService.LocationHasBuilding(data, row, col))
             {
@@ -107,24 +107,28 @@
         public void BuildGasFactory()
         {
             int planetId = PlanetService.GetPlanetIdByLocation(data, selectedCell);
+         
+            PlanetService.BuildFactory(data, FactoryType.GasFactory, playerId, selectedCell);
 
-            PlanetService.BuildFactory(data, planetId, Constants.GasFactoryHealth, FactoryType.GasFactory, selectedCell);
-
-            Clients.All.drawGameObjectGas(selectedCell.row, selectedCell.col);
+            Clients.All.drawGasFactory(selectedCell.row, selectedCell.col);
         }
 
         public void BuildMetalFactory()
         {
             int planetId = PlanetService.GetPlanetIdByLocation(data, selectedCell);
 
-            PlanetService.BuildFactory(data, planetId, Constants.MetalFactoryHealth, FactoryType.MetalFactory, selectedCell);
+            PlanetService.BuildFactory(data, FactoryType.GasFactory, playerId, selectedCell);
+
+            Clients.All.drawMetalFactory(selectedCell.row, selectedCell.col);
         }
 
         public void BuildMineralsFactory()
         {
             int planetId = PlanetService.GetPlanetIdByLocation(data, selectedCell);
 
-            PlanetService.BuildFactory(data, planetId, Constants.MineralsFactoryHealth, FactoryType.MineralsFactory, selectedCell);
+            PlanetService.BuildFactory(data, FactoryType.MineralsFactory, playerId, selectedCell);
+
+            Clients.All.drawMineralsFactory(selectedCell.row, selectedCell.col);
         }
 
 

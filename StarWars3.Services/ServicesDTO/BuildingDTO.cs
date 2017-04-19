@@ -7,7 +7,7 @@ namespace StarWars3.Services.ServicesDTO
     {
         public int Id { get; set; }
 
-        public Image Image { get; set; }
+        public byte[] Image { get; set; }
 
         public CellDTO Cell { get; set; }
     }
