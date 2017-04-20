@@ -19,7 +19,7 @@ namespace StarWars3.Services.Game
             {
                 Planet planet = new Planet()
                 {
-                    PlanetTemplate = context.PlanetTemplates.FirstOrDefault(p => p.IsTaken == false),
+                    PlanetTemplate = context.PlanetTemplates.FirstOrDefault(p => p.IsTaken == false)
                 };
 
                 if (planet.PlanetTemplate == null)

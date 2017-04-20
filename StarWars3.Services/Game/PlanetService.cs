@@ -5,6 +5,7 @@ namespace StarWars3.Services.Game
     using ServicesDTO;
     using StartWars3.Data.UnitOfWork;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     public static class PlanetService
@@ -18,7 +19,7 @@ namespace StarWars3.Services.Game
             return id;
         }
 
-        public static void BuildFactory(IStarWars3DB context, FactoryType factoryType,int playerId ,CellDTO location)
+        public static void BuildFactory(IStarWars3DB context, FactoryType factoryType, int playerId, CellDTO location)
         {
             FactoryTemplate factoryTemplate = context.FactoryTemplates.FirstOrDefault(t => t.FactoryType == factoryType);
 
@@ -34,58 +35,27 @@ namespace StarWars3.Services.Game
                 PlayerId = playerId,
                 Health = factoryTemplate.Health,
                 Shield = factoryTemplate.Shield,
-                Location = new Cell { row = location.row, col = location.col },    
+                Location = new Cell { row = location.row, col = location.col }
             };
 
             context.Factories.Add(factory);
             context.SaveChanges();
         }
 
-        public static void BuildFighter(IStarWars3DB context, int playerId, UnitType unitType,CellDTO location)
+        public static void buildUnit(IStarWars3DB context, int playerId, UnitType unitType, CellDTO location)
         {
-            int r = location.row;
-            int c = location.col;
+            Cell cell = FreeCell(context, location.row, location.col);
+            UnitLevel uLevel = GetUnitLevel(context, unitType, 0);
 
-            int[][] cellArray = new int[][]
+            if (cell != null)
             {
-                new int[] { (r - 1), c },
-                new int[] { (r - 1), (c + 1) },
-                new int[] { r, (c + 1) },
-                new int[] { (r + 1), (c + 1) },
-                new int[] { (r + 1), c },
-                new int[] { r, (c - 1) }
-            };
-
-
-            Cell cell = new Cell();
-            bool emptyCell = false;
-            for (int i = 0; i < cellArray.Length; i++)
-            {
-                Unit unit = PlayerService.LocationHasUnit(
-                    context, cellArray[i][0], cellArray[i][1]);
-                bool planet = PlayerService.LocationHasPlanet(
-                    context, cellArray[i][0], cellArray[i][1]);
-
-                if (unit == null && !planet)
+                UnitTemplate unitTemplate = context.UnitTemplates.FirstOrDefault(t => t.UnitType == unitType);
+                if (unitTemplate == null)
                 {
-                    cell.row = cellArray[i][0];
-                    cell.col = cellArray[i][1];
-                    emptyCell = true;
-                    break;
+                    throw new NullReferenceException("BuildFighter: unitTemplate not found!");
                 }
-            }
 
-            UnitTemplate unitTemplate = context.UnitTemplates.FirstOrDefault(t=>t.UnitType == unitType);
-            if (unitTemplate == null)
-            {
-                throw new NullReferenceException("BuildFighter: unitTemplate not found!");
-            }
-
-            UnitLevel uLevel = GetUnitLevel(context, unitTemplate.UnitType, 0);
-
-            if (emptyCell)
-            {
-                Unit fighter = new Unit()
+                Unit unit = new Unit()
                 {
                     UnitTemplateId = unitTemplate.Id,
                     PlayerId = playerId,
@@ -96,16 +66,65 @@ namespace StarWars3.Services.Game
                     Range = unitTemplate.Range,
                     Speed = unitTemplate.Speed,
                     Health = unitTemplate.Health,
-                    FuelConsumption = unitTemplate.FuelConsumption
+                    FuelConsumption = unitTemplate.FuelConsumption,                   
                 };
 
-                context.Units.Add(fighter);
+                context.Units.Add(unit);
                 context.SaveChanges();
+            }
+
+        }
+
+        private static Cell FreeCell(IStarWars3DB context, int r, int c)
+        {
+            int[][] cellArrayOdd = new int[][]
+            {
+                new int[] { (r - 1), c },
+                new int[] { (r - 1), (c + 1) },
+                new int[] { r, (c + 1) },
+                new int[] { (r + 1), (c + 1) },
+                new int[] { (r + 1), c },
+                new int[] { r, (c - 1) }
+            };
+
+            int[][] cellArrayEven = new int[][]
+            {
+                new int[] { (r - 1), (c - 1) },
+                new int[] { (r - 1), c },
+                new int[] { r, (c + 1) },
+                new int[] { (r + 1), c },
+                new int[] { (r + 1), (c - 1) },
+                new int[] { r, (c - 1) }
+            };
+
+            int[][] array;
+
+            if (r % 2 == 0)
+            {
+                array = cellArrayEven;
             }
             else
             {
-                //throw new ArgumentException("Not enought space in Space!");
+                array = cellArrayOdd;
             }
+
+            Cell cell = new Cell();
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                Unit unit = PlayerService.LocationHasUnit(
+                    context, array[i][0], array[i][1]);
+                Planet planet = PlayerService.LocationHasPlanet(
+                    context, array[i][0], array[i][1]);
+
+                if (unit == null && planet == null)
+                {
+                    cell.row = array[i][0];
+                    cell.col = array[i][1];
+                    return cell;
+                }
+            }
+            return null;
         }
 
         public static UnitLevel GetUnitLevel(IStarWars3DB context, UnitType unitType, int level)

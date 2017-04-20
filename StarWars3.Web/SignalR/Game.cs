@@ -14,6 +14,9 @@
         private static int playerId;
 
         private static CellDTO selectedCell;
+        private static CellDTO previousCell;
+
+        private static bool changeLocation;
 
         public Game(IStarWars3DB data)
         {
@@ -22,6 +25,11 @@
             if (selectedCell == null)
             {
                 selectedCell = new CellDTO();
+            }
+
+            if (previousCell == null)
+            {
+                previousCell = new CellDTO();
             }
         }
 
@@ -46,7 +54,7 @@
             {
                 foreach (var cell in planet.Cells)
                 {
-                    Clients.All.drawPlanet(cell.row, cell.col);
+                    Clients.All.drawGameObject(cell.row, cell.col, planet.Image);
                 }
             }
         }
@@ -57,7 +65,7 @@
 
             foreach (var building in buildings)
             {
-                Clients.All.drawGasFactory(building.Cell.row, building.Cell.col);
+                Clients.All.drawGameObject(building.Cell.row, building.Cell.col, building.Image);
             }
         }
 
@@ -67,7 +75,7 @@
 
             foreach (var unit in units)
             {
-                Clients.All.drawFighter(unit.Cell.row, unit.Cell.col);
+                Clients.All.drawGameObject(unit.Cell.row, unit.Cell.col, unit.Image);
             }
         }
 
@@ -77,24 +85,44 @@
         {
             ShowGame(playerId);
 
+            previousCell.row = selectedCell.row;
+            previousCell.col = selectedCell.col;
+
             selectedCell.row = row;
             selectedCell.col = col;
 
             Clients.Caller.markHexagonAsSelected(row, col);
 
             Unit unit = PlayerService.LocationHasUnit(data, row, col);
+            Planet planet = PlayerService.LocationHasPlanet(data, row, col);
+            Factory building = PlayerService.LocationHasBuilding(data, row, col);
 
-            if (unit != null)
+            if (unit != null && 
+                unit.PlayerId == playerId)
             {
+                changeLocation = true;
                 Clients.Caller.showUnitsStats(unit);
             }
-            else if (PlayerService.LocationHasBuilding(data, row, col))
+            else if (building != null &&
+                    planet != null &&
+                    planet.PlayerId == playerId)
             {
+                changeLocation = false;
                 Clients.Caller.showUnitsMenu();
             }
-            else if (PlayerService.LocationHasPlanet(data, row, col))
+            else if (planet != null &&
+                    building == null &&
+                    planet.PlayerId == playerId)
             {
+                changeLocation = false;
                 Clients.All.showBuildingsMenu();
+            }
+            else if (changeLocation)
+            {
+                PlayerService.ChangeUnitLocation(data, selectedCell, previousCell);
+                changeLocation = false;
+                Clients.All.hideMenu();
+                ShowGame(playerId);
             }
             else
             {
@@ -110,7 +138,7 @@
          
             PlanetService.BuildFactory(data, FactoryType.GasFactory, playerId, selectedCell);
 
-            Clients.All.drawGasFactory(selectedCell.row, selectedCell.col);
+            GetBuildings();
         }
 
         public void BuildMetalFactory()
@@ -119,7 +147,7 @@
 
             PlanetService.BuildFactory(data, FactoryType.GasFactory, playerId, selectedCell);
 
-            Clients.All.drawMetalFactory(selectedCell.row, selectedCell.col);
+            GetBuildings();
         }
 
         public void BuildMineralsFactory()
@@ -128,14 +156,20 @@
 
             PlanetService.BuildFactory(data, FactoryType.MineralsFactory, playerId, selectedCell);
 
-            Clients.All.drawMineralsFactory(selectedCell.row, selectedCell.col);
+            GetBuildings();
         }
 
 
         // //////////// CREATING UNITS ////////////////////
         public void BuildFighter()
         {
-            PlanetService.BuildFighter(data,playerId, UnitType.Fighter ,selectedCell);
+            PlanetService.buildUnit(data,playerId, UnitType.Fighter, selectedCell);
+
+            GetUnits();
+        }
+        public void BuildDestroyer()
+        {
+            PlanetService.buildUnit(data, playerId, UnitType.Destroyer, selectedCell);
 
             GetUnits();
         }
