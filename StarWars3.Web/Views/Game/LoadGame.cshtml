@@ -57,18 +57,18 @@
 		///////////////////////////////////////////////////////////////////
 		//// ON BOARD CLICK SHOW MENUS
 		//////////////////////////////////////////////////////////////////////////
-		game.client.showUnitsStats = function (unitLevel) {
+		game.client.showUnitsStats = function (unit) {
 
 		    unitsStats.find('ul').remove('.stats');
 
 		    let ul = $('<ul class="stats">').css('list-style', 'none');
-		    let level = $('<li>').text('Level: ' + unitLevel.Level);
-		    let helt = $('<li>').text('Healt: ' + unitLevel.Health);
-		    let atack = $('<li>').text('Atack: ' + unitLevel.Atack);
-		    let shield = $('<li>').text('Shield: ' + unitLevel.Shield);
-		    let armor = $('<li>').text('Armor: ' + unitLevel.Armor);
-		    let speed = $('<li>').text('Speed: ' + unitLevel.Speed);
-		    let fuel = $('<li>').text('Fuel: ' + unitLevel.FuelConsumption);
+		    let level = $('<li>').text('Level: ' + unit.Level);
+		    let helt = $('<li>').text('Healt: ' + unit.Health);
+		    let atack = $('<li>').text('Atack: ' + unit.Damage);
+		    let shield = $('<li>').text('Shield: ' + unit.Shield);
+		    let armor = $('<li>').text('Armor: ' + unit.Armor);
+		    let speed = $('<li>').text('Speed: ' + unit.Speed);
+		    let fuel = $('<li>').text('Fuel: ' + unit.FuelConsumption);
 
 		    ul.append(level)
                 .append(helt)

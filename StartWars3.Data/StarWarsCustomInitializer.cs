@@ -22,22 +22,22 @@
             SeedAccountsAndRoles(context);
             SeedPlanets(context);
 
-            string pathFighters = HttpContext.Current.Server.MapPath("~/App_Data/fighters.csv");
-            SeedFighterLevels(context, pathFighters);
+            //string pathFighters = HttpContext.Current.Server.MapPath("~/App_Data/fighters.csv");
+            //SeedFighterLevels(context, pathFighters);
 
-            string pathMetalFactory = "~/App_Data/robo_sc2.png";
-            string pathGasFactory = "~/App_Data/commandement_sc2.png";
-            string pathMineralsFactory = "~/App_Data/gateway_sc2.png";
-            string pathFighter = "~/App_Data/phoenix_sc2.png";
-            string pathDestroyer = "~/App_Data/carrier_sc2.png";
-            string pathPlanet = "~/App_Data/greenplanet.png";
+            //string pathMetalFactory = "~/App_Data/robo_sc2.png";
+            //string pathGasFactory = "~/App_Data/commandement_sc2.png";
+            //string pathMineralsFactory = "~/App_Data/gateway_sc2.png";
+            //string pathFighter = "~/App_Data/phoenix_sc2.png";
+            //string pathDestroyer = "~/App_Data/carrier_sc2.png";
+            //string pathPlanet = "~/App_Data/greenplanet.png";
 
-            ToByteArrayImage(context, pathMetalFactory, "MetalFactory", 50, 50);
-            ToByteArrayImage(context, pathGasFactory, "GasFactory", 50, 50);
-            ToByteArrayImage(context, pathMineralsFactory, "MineralsFactory", 50, 50);
-            ToByteArrayImage(context, pathFighter, "Fighter", 50, 50);
-            ToByteArrayImage(context, pathDestroyer, "Destroyer", 50, 50);
-            ToByteArrayImage(context, pathPlanet, "Planet", 50, 50);
+            //ToByteArrayImage(context, pathMetalFactory, "MetalFactory", 50, 50);
+            //ToByteArrayImage(context, pathGasFactory, "GasFactory", 50, 50);
+            //ToByteArrayImage(context, pathMineralsFactory, "MineralsFactory", 50, 50);
+            //ToByteArrayImage(context, pathFighter, "Fighter", 50, 50);
+            //ToByteArrayImage(context, pathDestroyer, "Destroyer", 50, 50);
+            //ToByteArrayImage(context, pathPlanet, "Planet", 50, 50);
 
             base.Seed(context);
         }
