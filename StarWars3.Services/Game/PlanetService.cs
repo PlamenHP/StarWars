@@ -45,7 +45,7 @@ namespace StarWars3.Services.Game
         public static void buildUnit(IStarWars3DB context, int playerId, UnitType unitType, CellDTO location)
         {
             Cell cell = FreeCell(context, location.row, location.col);
-            UnitLevel uLevel = GetUnitLevel(context, unitType, 0);
+            //UnitLevel uLevel = GetUnitLevel(context, unitType, 0);
 
             if (cell != null)
             {
@@ -66,7 +66,7 @@ namespace StarWars3.Services.Game
                     Range = unitTemplate.Range,
                     Speed = unitTemplate.Speed,
                     Health = unitTemplate.Health,
-                    FuelConsumption = unitTemplate.FuelConsumption,                   
+                    FuelConsumption = unitTemplate.FuelConsumption
                 };
 
                 context.Units.Add(unit);
@@ -112,7 +112,7 @@ namespace StarWars3.Services.Game
 
             for (int i = 0; i < array.Length; i++)
             {
-                Unit unit = PlayerService.LocationHasUnit(
+                Unit unit = PlayerService.GetUnitByLocation(
                     context, array[i][0], array[i][1]);
                 Planet planet = PlayerService.LocationHasPlanet(
                     context, array[i][0], array[i][1]);

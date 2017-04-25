@@ -6,7 +6,6 @@
     using Models;
     using Services.Game;
     using Services.ServicesDTO;
-    using Services.Utilities;
     using StartWars3.Data.UnitOfWork;
 
     public class Game : Hub
@@ -95,7 +94,8 @@
 
             Clients.Caller.markHexagonAsSelected(row, col);
 
-            Unit unit = PlayerService.LocationHasUnit(data, row, col);
+            UnitStatsDTO unitStats = PlayerService.LocationHasUnit(data, row, col);
+            Unit unit = PlayerService.GetUnitByLocation(data, row, col);
             Planet planet = PlayerService.LocationHasPlanet(data, row, col);
             Factory building = PlayerService.LocationHasBuilding(data, row, col);
 
@@ -103,7 +103,7 @@
                 unit.PlayerId == playerId)
             {
                 changeLocation = true;
-                Clients.Caller.showUnitsStats(unit);
+                Clients.Caller.showUnitsStats(unitStats);
             }
             else if (building != null &&
                     planet != null &&
@@ -147,7 +147,7 @@
         {
             int planetId = PlanetService.GetPlanetIdByLocation(data, selectedCell);
 
-            PlanetService.BuildFactory(data, FactoryType.GasFactory, playerId, selectedCell);
+            PlanetService.BuildFactory(data, FactoryType.MetalFactory, playerId, selectedCell);
 
             GetBuildings();
         }

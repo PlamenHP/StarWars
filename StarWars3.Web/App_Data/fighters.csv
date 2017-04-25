@@ -1,4 +1,4 @@
-Name,UnitType,Level,Atack,Shield,Armor,Health,Speed,FuelConsumption
+Name,UnitType,Level,Damage,Shield,Armor,Health,Speed,FuelConsumption
 FighterLevel_0,0,0,20,20,20,100,4,10
 FighterLevel_1,0,1,25,30,30,120,4,10
 FighterLevel_2,0,2,30,40,40,140,5,12
