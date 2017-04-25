@@ -1,5 +1,7 @@
 ﻿namespace StarWars3.Web.SignalR
 {
+    using AutoMapper;
+    using Infrastructure.Mapping;
     using Microsoft.AspNet.SignalR;
     using Models;
     using Services.Game;
@@ -172,6 +174,14 @@
             PlanetService.buildUnit(data, playerId, UnitType.Destroyer, selectedCell);
 
             GetUnits();
+        }
+
+        protected IMapper Mapper
+        {
+            get
+            {
+                return AutoMapperConfig.Configuration.CreateMapper();
+            }
         }
     }
 }
