@@ -1,4 +1,4 @@
-# StarWars - ASP.NET MVC + Entity Framework Teamwork project
+# StarWars - ASP.NET MVC + Entity Framework Teamwork project by Plamen Petrov and Nikola Kolev
 <ul>
 Implemented:
 <li>Repository pattern</li>
