@@ -1,4 +1,4 @@
-# StarWars - ASP.NET MVC + Entity Framework project
+# StarWars - ASP.NET MVC + Entity Framework Teamwork project
 <ul>
 Implemented:
 <li>Repository pattern</li>
